@@ -222,7 +222,7 @@ function c2c_obfuscate_email( $text, $encode_everything = 1, $at_replace = '&#06
 	$text = preg_replace("#(([a-z0-9\-_\.]+?)@([^\s,{}\(\)\[\]]+\.[^\s.,{}\(\)\[\]]+))#iesU",
 		"c2c_email_obfuscator(\"$1\", $encode_everything, \"$at_replace\", \"$dot_replace\")",
 		$text);
-	return substr($text,1,strlen($text)-2);
+	return trim($text);
 }
 
 ?>
