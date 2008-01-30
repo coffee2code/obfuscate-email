@@ -138,8 +138,8 @@ class ObfuscateEmail {
 		$action_url = $_SERVER[PHP_SELF] . '?page=' . basename(__FILE__);
 
 		echo <<<END
-		<div class='wrap'>\n
-			<h2>Obfuscate E-mail Plugin Options</h2>\n
+		<div class='wrap'>
+			<h2>Obfuscate E-mail Plugin Options</h2>
 			<p>Obfuscate e-mail addresses that appear as text in your blog in an effort to deter e-mail harvesting spammers.</p>
 			
 			<form name="obfuscate_email" action="$action_url" method="post">	
