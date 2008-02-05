@@ -39,7 +39,7 @@ or
 
 1. Unzip `obfuscate-email.zip` inside the `/wp-content/plugins/` directory, or upload `obfuscate-email.php` to `/wp-content/plugins/`
 1. Activate the plugin through the 'Plugins' admin menu in WordPress
-1. Go to the new `Options` -> `Obfuscate Email` admin options page.  Optionally customize the limits.
+1. Go to the new `Options` -> `Obfuscate Email` admin options page.  Optionally customize the settings.
 
 == Frequently Asked Questions ==
 
