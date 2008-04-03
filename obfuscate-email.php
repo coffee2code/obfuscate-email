@@ -5,27 +5,33 @@ Version: 2.0
 Plugin URI: http://coffee2code.com/wp-plugins/obfuscate-email
 Author: Scott Reilly
 Author URI: http://coffee2code.com
-Description: Obfuscate e-mail addresses in text and links via random hex and ASCII code substitutions while retaining the appearance and functionality of hyperlinks.
+Description: Obfuscate e-mail addresses that appear as text in your blog in an effort to deter e-mail harvesting spammers while retaining the appearance and functionality of hyperlinks.
 
-Any textual occurrence of an e-mail address in a post body, excerpt, or comment (and when admin and user emails are retrieved for display) will be obfuscated.
+Any textual occurrence of an e-mail address in a post body, excerpt, or comment (and when admin and 
+user emails are retrieved for display) will be obfuscated.
 
-By default, the entire e-mail address will be obfuscated using random hex and ASCII code substitutions.  For example, 
+By default, the entire e-mail address will be obfuscated using hexadecimal HTML entity substitutions.
+For example, 
 
-`<a href="mailto:person@example.com">person@example.com</a>`
+<a href="mailto:person@example.com">person@example.com</a>
 
 Would be translated into something like this:
 
-`<a href="mailto:&#112;&#101;&#114;&#115;&#x6F;&#110;&#x40;&#101;&#x78;&#x61;&#x6D;&#112;&#x6C;&#101;&#x2E;&#x63;om">&#112;&#x65;&#x72;&#x73;&#111;&#110;&#64;&#x65;&#x78;&#x61;&#109;&#x70;&#108;&#x65;&#x2E;&#99;om</a>`
+<a href="mailto:&#x70;&#x65;&#x72;&#x73;&#x6f;&#x6e;&#x40;&#x65;&#x78;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#x2e;&#x63;om" title="mailto:&#x70;&#x65;&#x72;&#x73;&#x6f;&#x6e;&#x40;&#x65;&#x78;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#x2e;&#x63;om">&#x70;&#x65;&#x72;&#x73;&#x6f;&#x6e;&#x40;&#x65;&#x78;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#x2e;&#x63;om</a>
 
-However, in your browser it would appear to you as it does prior to obfuscation, and the link for the e-mail would still work.  Theoretically, however, spammers would have a somewhat more difficult time harvesting the e-mails you display or link to in your posts.
+However, in your browser it would appear to you as it does prior to obfuscation, and the link for the
+e-mail would still work.  Theoretically, however, spammers would have a somewhat more difficult time
+harvesting the e-mails you display or link to in your posts.
 
-Via the plugin's admin options page located at `Options` -> `Obfuscate Emails` you can opt to only partially obfuscate an e-mail address.  By defining custom replacements for the `@` and `.` characters, you can have e-mails display like:
+Via the plugin's admin options page located at Options -> Obfuscate E-mail (or in WP 2.5: 
+Settings -> Obfuscate E-mail) you can opt to only partially obfuscate an e-mail address.  By defining 
+custom replacements for the `@` and `.` characters, you can have e-mails display like:
 
-`<a href="mailto:person[at]example[dot]com">person[at]example[dot]com</a>`
+<a href="mailto:person[at]example[dot]com">person[at]example[dot]com</a>
 
 or
 
-`<a href="mailto:person@DELETETHIS.com">person@DELETETHISexample.com</a>`
+<a href="mailto:person@DELETETHIS.com">person@DELETETHISexample.com</a>
 
 (Only when using the custom replacement feature will visitors need to modify the e-mail address for use in their e-mail program.)
 
@@ -39,7 +45,8 @@ Installation:
 1. Download the file http://coffee2code.com/wp-plugins/obfuscate-email.zip and unzip it into your 
 /wp-content/plugins/ directory.
 2. Activate the plugin through the 'Plugins' admin menu in WordPress
-3. Go to the new Options -> Obfuscate Email admin options page.  Optionally customize the options.
+3. Go to the new Options -> Obfuscate E-mail (or in WP 2.5: Settings -> Obfuscate E-mail) admin options page.  
+Optionally customize the options.
 
 */
 
@@ -138,7 +145,7 @@ class ObfuscateEmail {
 		echo <<<END
 		<div class='wrap'>
 			<h2>Obfuscate E-mail Plugin Options</h2>
-			<p>Obfuscate e-mail addresses that appear as text in your blog in an effort to deter e-mail harvesting spammers.</p>
+			<p>Obfuscate e-mail addresses that appear as text in your blog in an effort to deter e-mail harvesting spammers while retaining the appearance and functionality of hyperlinks.</p>
 			
 			<form name="obfuscate_email" action="$action_url" method="post">	
 END;
@@ -228,15 +235,7 @@ function c2c_email_obfuscator( $email, $encode_everything = 1, $at_replace = '&#
 		if (!$dot_replace) $dot_replace = '&#046;';
 		$email = str_replace(array('@', '.'), array($at_replace, $dot_replace), $email);
 	} else {
-		$new_email = '';
-		for( $i=0; $i < strlen($email); ++$i ) {
-			$n = rand(0,1);
-			if( $n )
-				$new_email .= '&#x'. sprintf("%X",ord($email{$i})) . ';';
-			else
-				$new_email .= '&#' . ord($email{$i}) . ';';
-		}
-		$email = $new_email;
+		$email = substr( chunk_split( bin2hex( " $email" ), 2, ";&#x" ), 3, -3 );
 	}
 	return $email;
 }
