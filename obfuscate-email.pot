@@ -1,0 +1,216 @@
+# Copyright (C) 2005-2011 Scott Reilly
+# This file is distributed under the same license as the Obfuscate E-mail package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Obfuscate E-mail 3.0\n"
+"Report-Msgid-Bugs-To: http://wordpress.org/tag/obfuscate-email\n"
+"POT-Creation-Date: 2011-07-24 05:27:11+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2010-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+
+#: c2c-plugin.php:77
+msgid "Invalid file specified for C2C_Plugin: %s"
+msgstr ""
+
+#: c2c-plugin.php:304
+msgid "Settings reset."
+msgstr ""
+
+#: c2c-plugin.php:315 c2c-plugin.php:323
+msgid "A value is required for: \"%s\""
+msgstr ""
+
+#: c2c-plugin.php:332
+msgid "Expected integer value for: %s"
+msgstr ""
+
+#: c2c-plugin.php:442
+msgid "More information about %1$s %2$s"
+msgstr ""
+
+#: c2c-plugin.php:443
+msgid "Click for more help on this plugin"
+msgstr ""
+
+#: c2c-plugin.php:444
+msgid " (especially check out the \"Other Notes\" tab, if present)"
+msgstr ""
+
+#: c2c-plugin.php:535
+msgid "Settings"
+msgstr ""
+
+#: c2c-plugin.php:770
+msgid "See the \"Help\" link to the top-right of the page for more help."
+msgstr ""
+
+#: c2c-plugin.php:791
+msgid "A plugin by coffee2code"
+msgstr ""
+
+#: c2c-plugin.php:802
+msgid "Save Changes"
+msgstr ""
+
+#: c2c-plugin.php:803
+msgid "Reset Settings"
+msgstr ""
+
+#: c2c-plugin.php:809
+msgid "Scott Reilly, aka coffee2code"
+msgstr ""
+
+#: c2c-plugin.php:810
+msgid "This plugin brought to you by %s."
+msgstr ""
+
+#: c2c-plugin.php:811
+msgid "Please consider a donation"
+msgstr ""
+
+#: c2c-plugin.php:812
+msgid "Did you find this plugin useful?"
+msgstr ""
+
+#. #-#-#-#-#  obfuscate-email.pot (Obfuscate E-mail 3.0)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: obfuscate-email.php:118 obfuscate-email.php:119
+msgid "Obfuscate E-mail"
+msgstr ""
+
+#: obfuscate-email.php:123
+msgid "Obfuscate entire e-mail address?"
+msgstr ""
+
+#: obfuscate-email.php:124
+msgid ""
+"All characters of the e-mail address will be obfuscated using hexadecimal "
+"HTML entity substitution."
+msgstr ""
+
+#: obfuscate-email.php:126
+msgid "Replacement for '<code>@</code>'"
+msgstr ""
+
+#: obfuscate-email.php:127
+msgid ""
+"Only applicable if 'Obfuscate entire e-mail address?' is not checked.<br /"
+">Ex. set this to '[at]' to get person[at]email.com<br />If applicable but "
+"not defined, then <code>&amp;#064;</code> (which is the encoding for &#064;) "
+"will be used."
+msgstr ""
+
+#: obfuscate-email.php:129
+msgid "Replacement for '<code>.</code>'"
+msgstr ""
+
+#: obfuscate-email.php:130
+msgid ""
+"Only applicable if 'Obfuscate entire e-mail address?' is not checked.<br /"
+">Ex. set this to '[dot]' to get person@email[dot]com<br />If applicable but "
+"not defined, then <code>&amp;#046;</code> (which is the encoding for &#046;) "
+"will be used."
+msgstr ""
+
+#: obfuscate-email.php:132
+msgid "Utilize CSS text direction technique?"
+msgstr ""
+
+#: obfuscate-email.php:133
+msgid ""
+"This reverses the e-mails as they appear in the markup and utilizes CSS to "
+"reverse the text back to the correct direction for visitors to see/use."
+msgstr ""
+
+#: obfuscate-email.php:135
+msgid "Utilize CSS display:none technique?"
+msgstr ""
+
+#: obfuscate-email.php:136
+msgid ""
+"This embeds text within e-mail string and utilizes CSS to hide that so it "
+"doesn't appear to visitors."
+msgstr ""
+
+#: obfuscate-email.php:164
+msgid "Obfuscate E-mail Settings"
+msgstr ""
+
+#: obfuscate-email.php:166
+msgid ""
+"If open registration is enabled for your site (via Settings &rarr; General "
+"&rarr; Membership (\"Anyone can register\")), WordPress allows visitors to "
+"register for an account on your blog.  By default, any username they choose "
+"is allowed so long as it isn't an already existing account and it doesn't "
+"include invalid (i.e. non-alphanumeric) characters."
+msgstr ""
+
+#: obfuscate-email.php:167
+msgid "Possible reasons for wanting to restrict certain usernames:"
+msgstr ""
+
+#: obfuscate-email.php:169
+msgid ""
+"Prevent usernames that contain foul, offensive, or otherwise undesired words"
+msgstr ""
+
+#: obfuscate-email.php:170
+msgid ""
+"Prevent squatting on usernames that you may want to use in the future (but "
+"don't want to actually create the account for just yet) (essentially placing "
+"a hold on the username)"
+msgstr ""
+
+#: obfuscate-email.php:171
+msgid ""
+"Prevent official-sounding usernames from being used (i.e. help, support, pr, "
+"info)"
+msgstr ""
+
+#: obfuscate-email.php:172
+msgid ""
+"Prevent official username syntax from being used (i.e. if all of your admins "
+"use a prefix to identify themselves, you don't want a visitor to use that "
+"prefix)"
+msgstr ""
+
+#: obfuscate-email.php:174
+msgid ""
+"When attempting to register with a restricted username, the visitor will be "
+"given an error notice that says:"
+msgstr ""
+
+#: obfuscate-email.php:175
+msgid "ERROR: This username is invalid. Please enter a valid username."
+msgstr ""
+
+#: obfuscate-email.php:176
+msgid ""
+"NOTE: This plugin does not put any restrictions on usernames that the admin "
+"chooses for users when creating user accounts from within the WordPress "
+"admin.  This only restricts the names that users choose themselves when "
+"registering for your site."
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://coffee2code.com/wp-plugins/obfuscate-email"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Obfuscate e-mail addresses that appear as text in your blog in an effort to "
+"deter e-mail harvesting spammers while retaining the appearance and "
+"functionality of hyperlinks."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Scott Reilly"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://coffee2code.com"
+msgstr ""
