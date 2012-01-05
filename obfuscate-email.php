@@ -2,19 +2,20 @@
 /**
  * @package Obfuscate_Email
  * @author Scott Reilly
- * @version 3.0
+ * @version 3.1
  */
 /*
 Plugin Name: Obfuscate E-mail
-Version: 3.0
+Version: 3.1
 Plugin URI: http://coffee2code.com/wp-plugins/obfuscate-email/
 Author: Scott Reilly
-Author URI: http://coffee2code.com
+Author URI: http://coffee2code.com/
 Text Domain: obfuscate-email
-Description: Obfuscate e-mail addresses that appear as text on your site in an effort to deter e-mail harvesting spammers while retaining the appearance and functionality of hyperlinks.
+Domain Path: /lang/
+Description: Obfuscate e-mail addresses to deter e-mail harvesting spammers, while retaining the appearance and functionality of hyperlinks.
 
 
-Compatible with WordPress 3.0+, 3.1+, 3.2+.
+Compatible with WordPress 3.1+, 3.2+, 3.3+.
 
 =>> Read the accompanying readme.txt file for instructions and documentation.
 =>> Also, visit the plugin's homepage for additional information and updates.
@@ -24,6 +25,9 @@ TODO:
 	* Add test suite
 	* Filter to override class names used 'oe_textdirection', 'oe_displaynone'
 	* Allow settings to be configured via define() and settings page deactivated for MS use
+	* Consider obscuring "mailto:" as well?
+	* Have regexp account for possible spaces around email in attrib. i.e. href="mailto: joe@example.com "
+	* Add help tabs explaining the different obfuscation methods
 	* Add support for JS ROT13 method?
 	= ROT13 encryption =
 	*How does it work?* The email addresses are displayed using ROT13 encryption (replacing each letter with the 13th letter that follows it).  JavaScript is used to decode the strings so that visitors see the email properly.  Email scrapers don't typically utilize a JavaScript engine to help determine how text would look onscreen.
@@ -36,7 +40,7 @@ TODO:
 */
 
 /*
-Copyright (c) 2005-2011 by Scott Reilly (aka coffee2code)
+Copyright (c) 2005-2012 by Scott Reilly (aka coffee2code)
 
 Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation 
 files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, 
@@ -55,7 +59,7 @@ if ( ! class_exists( 'c2c_ObfuscateEmail' ) ) :
 
 require_once( 'c2c-plugin.php' );
 
-class c2c_ObfuscateEmail extends C2C_Plugin_026 {
+class c2c_ObfuscateEmail extends C2C_Plugin_034 {
 
 	public static $instance;
 
@@ -77,7 +81,7 @@ class c2c_ObfuscateEmail extends C2C_Plugin_026 {
 		if ( ! is_null( self::$instance ) )
 			return;
 
-		$this->C2C_Plugin_026( '3.0', 'obfuscate-email', 'c2c', __FILE__, array() );
+		parent::__construct( '3.1', 'obfuscate-email', 'c2c', __FILE__, array() );
 		register_activation_hook( __FILE__, array( __CLASS__, 'activation' ) );
 		self::$instance = $this;
 	}
@@ -130,10 +134,10 @@ class c2c_ObfuscateEmail extends C2C_Plugin_026 {
 					'help' => __( 'Only applicable if \'Obfuscate entire e-mail address?\' is not checked.<br />Ex. set this to \'[dot]\' to get person@email[dot]com<br />If applicable but not defined, then <code>&amp;#046;</code> (which is the encoding for &#046;) will be used.', $this->textdomain ) ),
 			'use_text_direction' => array( 'input' => 'checkbox', 'default' => true,
 					'label' => __( 'Utilize CSS text direction technique?', $this->textdomain ),
-					'help' => __( 'This reverses the e-mails as they appear in the markup and utilizes CSS to reverse the text back to the correct direction for visitors to see/use.', $this->textdomain ) ),
+					'help' => __( 'This reverses the e-mail address strings as they appear in the markup and utilizes CSS to reverse the text back to the correct direction for visitors to see/use.', $this->textdomain ) ),
 			'use_display_none' => array( 'input' => 'checkbox', 'default' => true,
 					'label' => __( 'Utilize CSS display:none technique?', $this->textdomain ),
-					'help' => __( 'This embeds text within e-mail string and utilizes CSS to hide that so it doesn\'t appear to visitors.', $this->textdomain ) ),
+					'help' => __( 'This embeds extraneous text within e-mail address strings and then utilizes CSS to hide them so they don\'t appear to visitors.', $this->textdomain ) ),
 		);
 	}
 
@@ -169,7 +173,7 @@ CSS;
 	}
 
 	/**
-	 * Obfuscate plaintext emails
+	 * Obfuscate plaintext emails.
 	 *
 	 * @param string $text The text containing emails to obfuscate
 	 * @param array $args An array of configuration options, each element of which will override the plugin's corresponding default setting.
@@ -183,41 +187,51 @@ CSS;
 
 		$text = ' ' . $text . ' ';
 
-		$cb = array( &$this, 'obfuscate_email_cb' );
+		$cb               = array( &$this, 'obfuscate_email_cb' );
+		$cb_for_attribute = array( &$this, 'obfuscate_email_in_attribute_cb' );
 
 		// pre-3.0 regex : "#(([a-z0-9\-_\.]+?)@([^\s,{}\(\)\[\]]+\.[^\s.,{}\(\)\[\]]+))#iesU"
 
-		// This matches emails except for those appearing in tag attributes. (only need that refinement if wrapping text in tags)
-		if ( $options['use_text_direction'] )
-			$text = preg_replace_callback( '#([\s>])([.0-9a-z_+-]+)@(([0-9a-z-]+\.)+[0-9a-z]{2,})#i', $cb, $text );
+		// This isn't making any attempts to only recognize valid email address
+		// syntax. Basically anything roughly like x@y.zz looks like an email.
+		$email_regex = '([.0-9a-z_+-]+)@(([0-9a-z-]+\.)+[0-9a-z]{2,})';
 
-		// If checking again, then the only emails that are left are those in attributes.
-		// Also, this is the first check if code_redirection is false.
-		$text = preg_replace_callback('#([.0-9a-z_+-]+)@(([0-9a-z-]+\.)+[0-9a-z]{2,})#i', $cb, $text );
+		// This matches emails except for those appearing in tag attributes.
+		// (only need that refinement if wrapping text in tags)
+		if ( $options['use_text_direction'] || $options['use_display_none'] )
+			$text = preg_replace_callback( "#(?!<.*?)$email_regex(?![^<>]*?>)#i", $cb, $text );
+
+		// If checking again, then the only emails that are left are those in
+		// attributes. Is the first check if use_text_direction is false.
+		$text = preg_replace_callback( "#$email_regex#i", $cb_for_attribute, $text );
 
 		return trim( $text );
 	}
 
 	/**
-	 * Obfuscate plaintext emails callback
+	 * Obfuscate plaintext emails callback for email address appearing in tag
+	 * attribute.
+	 *
+	 * @since 3.1
 	 *
 	 * @param string $email The email to obfuscate
 	 * @return string The obfuscated email.
 	 */
-	function obfuscate_email_cb( $matches ) {
+	function obfuscate_email_in_attribute_cb( $matches ) {
+		return $this->obfuscate_email_cb( $matches, false );
+	}
+
+	/**
+	 * Obfuscate plaintext emails callback.
+	 *
+	 * @param string $email The email to obfuscate
+	 * @return string The obfuscated email.
+	 */
+	function obfuscate_email_cb( $matches, $allow_markup = true ) {
 		$options = $this->get_options();
 
-		if ( isset( $matches[4] ) ) { // $matches[4] is only set if email is not within tag attribute
-			$allow_markup = true;
-			$before = $matches[1];
-			$email_name = $matches[2];
-			$email_host = $matches[3];
-		} else {
-			$allow_markup = false;
-			$before = '';
-			$email_name = $matches[1];
-			$email_host = $matches[2];
-		}
+		$email_name   = $matches[1];
+		$email_host   = $matches[2];
 
 		if ( $allow_markup && $options['use_text_direction'] ) {
 			$email_name = strrev( $email_name );
@@ -254,9 +268,9 @@ CSS;
 			$email = $email_name . $at . $email_host;
 
 		if ( $allow_markup && $options['use_text_direction'] )
-			$email = '<span class=" ' . $this->css_text_direction . '">' . $email . '</span>';
+			$email = '<span class="' . $this->css_text_direction . '">' . $email . '</span>';
 
-		return $before . $email;
+		return $email;
 	}
 
 } // end c2c_ObfuscateEmail
