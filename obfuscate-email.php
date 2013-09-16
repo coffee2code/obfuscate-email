@@ -2,20 +2,21 @@
 /**
  * @package Obfuscate_Email
  * @author Scott Reilly
- * @version 3.1
+ * @version 3.2
  */
 /*
 Plugin Name: Obfuscate E-mail
-Version: 3.1
+Version: 3.2
 Plugin URI: http://coffee2code.com/wp-plugins/obfuscate-email/
 Author: Scott Reilly
 Author URI: http://coffee2code.com/
 Text Domain: obfuscate-email
 Domain Path: /lang/
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Description: Obfuscate e-mail addresses to deter e-mail harvesting spammers, while retaining the appearance and functionality of hyperlinks.
 
-
-Compatible with WordPress 3.1+, 3.2+, 3.3+.
+Compatible with WordPress 3.1+ through 3.6+.
 
 =>> Read the accompanying readme.txt file for instructions and documentation.
 =>> Also, visit the plugin's homepage for additional information and updates.
@@ -24,7 +25,6 @@ Compatible with WordPress 3.1+, 3.2+, 3.3+.
 TODO:
 	* Add test suite
 	* Filter to override class names used 'oe_textdirection', 'oe_displaynone'
-	* Allow settings to be configured via define() and settings page deactivated for MS use
 	* Consider obscuring "mailto:" as well?
 	* Have regexp account for possible spaces around email in attrib. i.e. href="mailto: joe@example.com "
 	* Add help tabs explaining the different obfuscation methods
@@ -40,50 +40,66 @@ TODO:
 */
 
 /*
-Copyright (c) 2005-2012 by Scott Reilly (aka coffee2code)
+	Copyright (c) 2005-2013 by Scott Reilly (aka coffee2code)
 
-Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated documentation 
-files (the "Software"), to deal in the Software without restriction, including without limitation the rights to use, copy, 
-modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons to whom the 
-Software is furnished to do so, subject to the following conditions:
+	This program is free software; you can redistribute it and/or
+	modify it under the terms of the GNU General Public License
+	as published by the Free Software Foundation; either version 2
+	of the License, or (at your option) any later version.
 
-The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES
-OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE
-LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR
-IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+	You should have received a copy of the GNU General Public License
+	along with this program; if not, write to the Free Software
+	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
 */
+
+defined( 'ABSPATH' ) or die();
 
 if ( ! class_exists( 'c2c_ObfuscateEmail' ) ) :
 
 require_once( 'c2c-plugin.php' );
 
-class c2c_ObfuscateEmail extends C2C_Plugin_034 {
-
-	public static $instance;
-
-	// public until filters are added
-	public $css_text_direction  = 'oe_textdirection';
-	public $css_display_none    = 'oe_displaynone';
-
-	private $custom_options = null;
+final class c2c_ObfuscateEmail extends C2C_Plugin_036 {
 
 	/**
-	 * Constructor
+	 * @var c2c_ObfuscateEmail The one true instance
 	 */
-	public function __construct() {
-		$this->c2c_ObfuscateEmail();
+	private static $instance;
+
+	/**
+	 * @var string Default CSS class to indicate text direction enabled (public until filter is added)
+	 */
+	public $css_text_direction  = 'oe_textdirection';
+
+	/**
+	 * @var string CSS class to indicate non-display (public until filter is added)
+	 */
+	public $css_display_none    = 'oe_displaynone';
+
+	/**
+	 * Get singleton instance.
+	 *
+	 * @since 3.2
+	 */
+	public static function instance() {
+		if ( ! isset( self::$instance ) )
+			self::$instance = new self();
+
+		return self::$instance;
 	}
 
-	public function c2c_ObfuscateEmail() {
-		// Be a singleton
-		if ( ! is_null( self::$instance ) )
-			return;
-
-		parent::__construct( '3.1', 'obfuscate-email', 'c2c', __FILE__, array() );
+	/**
+	 * Constructor.
+	 */
+	protected function __construct() {
+		parent::__construct( '3.2', 'obfuscate-email', 'c2c', __FILE__, array() );
 		register_activation_hook( __FILE__, array( __CLASS__, 'activation' ) );
-		self::$instance = $this;
+
+		return self::$instance = $this;
 	}
 
 	/**
@@ -132,9 +148,9 @@ class c2c_ObfuscateEmail extends C2C_Plugin_034 {
 			'dot_replace' => array( 'input' => 'text', 'default' => '',
 					'label' => __( 'Replacement for \'<code>.</code>\'', $this->textdomain ),
 					'help' => __( 'Only applicable if \'Obfuscate entire e-mail address?\' is not checked.<br />Ex. set this to \'[dot]\' to get person@email[dot]com<br />If applicable but not defined, then <code>&amp;#046;</code> (which is the encoding for &#046;) will be used.', $this->textdomain ) ),
-			'use_text_direction' => array( 'input' => 'checkbox', 'default' => true,
+			'use_text_direction' => array( 'input' => 'checkbox', 'default' => false,
 					'label' => __( 'Utilize CSS text direction technique?', $this->textdomain ),
-					'help' => __( 'This reverses the e-mail address strings as they appear in the markup and utilizes CSS to reverse the text back to the correct direction for visitors to see/use.', $this->textdomain ) ),
+					'help' => __( 'This reverses the e-mail address strings as they appear in the markup and utilizes CSS to reverse the text back to the correct direction for visitors to see/use. Note that copying-and-pasting of unlinked text e-mail addresses will result in the pasted text being reversed. Copying the e-mail address (via right-click menu) will work properly.', $this->textdomain ) ),
 			'use_display_none' => array( 'input' => 'checkbox', 'default' => true,
 					'label' => __( 'Utilize CSS display:none technique?', $this->textdomain ),
 					'help' => __( 'This embeds extraneous text within e-mail address strings and then utilizes CSS to hide them so they don\'t appear to visitors.', $this->textdomain ) ),
@@ -154,22 +170,22 @@ class c2c_ObfuscateEmail extends C2C_Plugin_034 {
 		 'term_description', 'the_title', 'the_content', 'get_the_excerpt', 'comment_text', 'list_cats', 'widget_text',
 		 'the_author_email', 'get_comment_author_email' ) );
 		foreach( $filters as $filter )
-			add_filter( $filter, array( &$this, 'obfuscate_email' ), 15 );
+			add_filter( $filter, array( $this, 'obfuscate_email' ), 15 );
 
-		add_action( 'wp_head', array( &$this, 'add_css' ) );
+		add_action( 'wp_head', array( $this, 'add_css' ) );
 	}
 
 	/**
 	 * Outputs CSS
 	 */
 	function add_css() {
-		echo <<<CSS
+		echo <<<HTML
 		<style type="text/css">
-		span.{$this->css_text_direction} { unicode-bidi:bidi-override; direction: rtl; }
-		span.{$this->css_display_none} { display:none; }
+		span.{$this->css_text_direction} { unicode-bidi: bidi-override; direction: rtl; }
+		span.{$this->css_display_none} { display: none; }
 		</style>
 
-CSS;
+HTML;
 	}
 
 	/**
@@ -187,8 +203,8 @@ CSS;
 
 		$text = ' ' . $text . ' ';
 
-		$cb               = array( &$this, 'obfuscate_email_cb' );
-		$cb_for_attribute = array( &$this, 'obfuscate_email_in_attribute_cb' );
+		$cb               = array( $this, 'obfuscate_email_cb' );
+		$cb_for_attribute = array( $this, 'obfuscate_email_in_attribute_cb' );
 
 		// pre-3.0 regex : "#(([a-z0-9\-_\.]+?)@([^\s,{}\(\)\[\]]+\.[^\s.,{}\(\)\[\]]+))#iesU"
 
@@ -275,8 +291,7 @@ CSS;
 
 } // end c2c_ObfuscateEmail
 
-// Access the instance object via: c2c_ObfuscateEmail::$instance
-new c2c_ObfuscateEmail();
+c2c_ObfuscateEmail::instance();
 
 endif; // end if !class_exists()
 
@@ -293,7 +308,7 @@ function c2c_obfuscate_email( $text, $args = array(), $deprecated_1 = null, $dep
 	if ( ! is_array( $args ) || $deprecated_1 || $deprecated_2 || $deprecated_3 )
 		_deprecated_argument( __FUNCTION__, '3.0', 'Use $args array argument to override default settings.' );
 
-	return c2c_ObfuscateEmail::$instance->obfuscate_email( $text, $args );
+	return c2c_ObfuscateEmail::instance()->obfuscate_email( $text, $args );
 }
 endif;
 
@@ -319,5 +334,3 @@ endif;
 		return c2c_obfuscate_email( $email );
 	}
 	endif;
-
-?>

@@ -2,10 +2,12 @@
 Contributors: coffee2code
 Donate link: http://coffee2code.com/donate
 Tags: email, obfuscation, security, spam, coffee2code
+License: GPLv2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 3.1
-Tested up to: 3.3.1
-Stable tag: 3.1
-Version: 3.1
+Tested up to: 3.6
+Stable tag: 3.2
+Version: 3.2
 
 Obfuscate e-mail addresses to deter e-mail harvesting spammers, while retaining the appearance and functionality of hyperlinks.
 
@@ -28,11 +30,11 @@ The e-mail obfuscation techniques included in this plugin were chosen for their 
 
 Three techniques stood out as having received *zero* spam e-mails during that time.  Two of those three techniques are included in this plugin.  The fourth technique is also included even though it did get a very small amount of spam -- the technique was still very effective and more importantly does not rely on users to have CSS or JavaScript enabled.
 
-The techniques are as follows. All three are enabled by default. Weigh the requirements against what you're comfortable requiring of visitors in order for them to see and make use of e-mail addresses you post on your site.
+The techniques are as follows. Two are enabled by default. Weigh the requirements against what you're comfortable requiring of visitors in order for them to see and make use of e-mail addresses you post on your site.
 
 (For all the examples below, assume you have the link `<a href="mailto:person@example.com">person@example.com</a>` in your post.)
 
-= Changing text direction with CSS =
+= Changing text direction with CSS (no enabled by default) =
 
 * *How does it work?* The email addresses are sent reversed in the markup. Using CSS, the text gets reversed so that visitors see the email addresses as intended. Email scrapers don't recognize the emails in their reversed form and don't typically utilize a CSS engine to help determine how text would look onscreen.
 
@@ -40,7 +42,7 @@ The techniques are as follows. All three are enabled by default. Weigh the requi
 
 * *Uses JavasScript?* No.
 
-* *Can visitor copy-n-paste the link from onscreen text without needing to make modifications?* No, but a "copy link address" will work properly.
+* *Can visitor copy-n-paste the link from onscreen text without needing to make modifications?* No, text copied in such a manner will be reverserd. However, a right-click -> "copy link/email address" will work properly for linked e-mail addresses.
 
 * *Does this protect emails appearing in mailto: links and within HTML tag attributes?* No.
 
@@ -85,13 +87,13 @@ The techniques are as follows. All three are enabled by default. Weigh the requi
 * *Examples*
     * Custom AT and DOT replacements
         * `<a href="mailto:personATexampleDOTcom">personATexampleDOTcom</a>`
-        * `<a href="mailto:person@DELETETHIS.com">person@DELETETHISexample.com</a>`
+        * `<a href="mailto:person@DELETETHISexample.com">person@DELETETHISexample.com</a>`
     * Everything encoded (aka hexadecimal HTML entity substitution)
 `<a href="mailto:&#x70;&#x65;&#x72;&#x73;&#x6f;&#x6e;&#x40;&#x65;&#x78;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#x2e;&#x63;&#x6f;&#x6d;">&#x70;&#x65;&#x72;&#x73;&#x6f;&#x6e;&#x40;&#x65;&#x78;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#x2e;&#x63;&#x6f;&#x6d;</a>`
 
 = How it looks =
 
-If all techniques are enabled at once, the resulting obfuscation of the example link above is:
+If all techniques are enabled at once, the resulting obfuscation of the example link above is (for the full effect, view this in the page's source):
 
 `<a href="mailto:&#x70;&#x65;&#x72;&#x73;&#x6f;&#x6e;&#x40;&#x65;&#x78;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#x2e;&#x63;&#x6f;&#x6d;"><span class="codedirection">&#x6d;&#x6f;&#x63;&#x2e;&#x65;&#x6c;&#x70;&#x6d;&#x61;&#x78;&#x65;<span class="displaynone">null</span>&#x40;&#x6e;&#x6f;&#x73;&#x72;&#x65;&#x70;</span></a>`
 
@@ -115,7 +117,7 @@ Links: [Plugin Homepage](http://coffee2code.com/wp-plugins/obfuscate-email/) | [
 
 = So it'll be impossible for spammers to harvest my site for e-mail addresses? =
 
-Of course nothing is guaranteed.  By its very definition, "obfuscate" means "to make obscure or unclear", and that's all it's really doing.  It's some degree of basic protection, which is better than nothing.  Much as how locks in real-life at best provide some measure of deterrent for a would be criminal rather than absolute security from a determined and capable individual.  That said, some testing (as described elsewhere in this documentation) indicates using one or more of the supplied techniques are extremely effective.
+Of course nothing is guaranteed.  By its very definition, "obfuscate" means "to make obscure or unclear", and that's all it's really doing.  It's some degree of basic protection, which is better than nothing.  Much as how locks in real-life at best provide some measure of deterrent for a would-be criminal rather than absolute security from a determined and capable individual.  That said, some testing (as described elsewhere in this documentation) indicates using one or more of the supplied techniques are extremely effective.
 
 = Aren't there better methods of e-mail obfuscation? =
 
@@ -127,7 +129,7 @@ No.  This makes this plugin's implementation of obfuscation more compatible and 
 
 = This plugin provides multiple techniques for e-mail obfuscation; can I apply more than one at once for even greater protection? =
 
-Yes, all techniques can be activated at once (and they are by default).
+Yes, all techniques can be activated at once (and multiple ones are by default).
 
 = Does this plugin modify the post content in the database? =
 
@@ -213,6 +215,28 @@ function change_c2c_obfuscate_email_filters( $filters ) {
 
 == Changelog ==
 
+= 3.2 =
+* Disable text direction technique by default (doesn't change existing setting value)
+* Update plugin framework to 036
+* Better singleton implementation:
+    * Add `instance()` static method for returning/creating singleton instance
+    * Made static variable 'instance' private
+    * Made constructor protected
+    * Made class final
+    * Additional related changes in plugin framework (protected constructor, erroring `__clone()` and `__wakeup()`)
+* Add checks to prevent execution of code if file is directly accessed
+* Regenerate .pot
+* Re-license as GPLv2 or later (from X11)
+* Add 'License' and 'License URI' header tags to readme.txt and plugin file
+* Discontinue use of PHP4-style constructor
+* Discontinue use of explicit pass-by-reference for objects
+* Remove ending PHP close tag
+* Minor documentation improvements
+* Minor code reformatting (spacing)
+* Note compatibility through WP 3.6+
+* Update copyright date (2013)
+* Move screenshots into repo's assets directory
+
 = 3.1 =
 * Fix bug where display:none technique was ignored if text direction technique was not active
 * Fix bug where display:none and text direction techniques were erroneously applied to email addresses in tag attributes when mid-string
@@ -280,6 +304,9 @@ function change_c2c_obfuscate_email_filters( $filters ) {
 
 
 == Upgrade Notice ==
+
+= 3.2 =
+Recommended update. Highlights: disabled text direction technique by default; updated plugin framework; noted compatibility through WP 3.6+; and more.
 
 = 3.1 =
 Recommended update. Fixed a number of bugs; noted WP 3.3 compatibility; dropped support for versions of WP older than 3.1; updated plugin framework; and more.
