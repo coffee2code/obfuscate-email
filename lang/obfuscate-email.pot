@@ -1,15 +1,15 @@
-# Translation of the WordPress plugin Obfuscate E-mail v3.2 by Scott Reilly.
-# Copyright (C) 2013 Scott Reilly
+# Translation of the WordPress plugin Obfuscate E-mail v3.3 by Scott Reilly.
+# Copyright (C) 2015 Scott Reilly
 # This file is distributed under the same license as the Obfuscate E-mail plugin.
 msgid ""
 msgstr ""
-"Project-Id-Version: Obfuscate E-mail 3.2\n"
+"Project-Id-Version: Obfuscate E-mail 3.3\n"
 "Report-Msgid-Bugs-To: http://wordpress.org/support/plugin/obfuscate-email\n"
-"POT-Creation-Date: 2013-09-16 19:06:01+00:00\n"
+"POT-Creation-Date: 2015-03-03 06:25:08+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2010-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2015-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 
@@ -17,103 +17,103 @@ msgstr ""
 msgid "Invalid file specified for C2C_Plugin: %s"
 msgstr ""
 
-#: c2c-plugin.php:125 c2c-plugin.php:132
+#: c2c-plugin.php:127 c2c-plugin.php:134
 msgid "Cheatin&#8217; huh?"
 msgstr ""
 
-#: c2c-plugin.php:309
+#: c2c-plugin.php:322
 msgid "See the \"Help\" link to the top-right of the page for more help."
 msgstr ""
 
-#: c2c-plugin.php:342
+#: c2c-plugin.php:357
 msgid "Settings reset."
 msgstr ""
 
-#: c2c-plugin.php:353 c2c-plugin.php:361
+#: c2c-plugin.php:368 c2c-plugin.php:376
 msgid "A value is required for: \"%s\""
 msgstr ""
 
-#: c2c-plugin.php:370
+#: c2c-plugin.php:385
 msgid "Expected integer value for: %s"
 msgstr ""
 
-#: c2c-plugin.php:482
+#: c2c-plugin.php:502
 msgid "More information about %1$s %2$s"
 msgstr ""
 
-#: c2c-plugin.php:483
+#: c2c-plugin.php:503
 msgid "Click for more help on this plugin"
 msgstr ""
 
-#: c2c-plugin.php:484
+#: c2c-plugin.php:504
 msgid " (especially check out the \"Other Notes\" tab, if present)"
 msgstr ""
 
-#: c2c-plugin.php:598
+#: c2c-plugin.php:620
 msgid "More Help"
 msgstr ""
 
-#: c2c-plugin.php:610
+#: c2c-plugin.php:632
 msgid "Settings"
 msgstr ""
 
-#: c2c-plugin.php:622
+#: c2c-plugin.php:644
 msgid "Donation for coffee2code plugin: %s"
 msgstr ""
 
-#: c2c-plugin.php:623
+#: c2c-plugin.php:645
 msgid "Coffee fuels my coding."
 msgstr ""
 
-#: c2c-plugin.php:858
+#: c2c-plugin.php:914
 msgid "A plugin by coffee2code"
 msgstr ""
 
-#: c2c-plugin.php:867
+#: c2c-plugin.php:923
 msgid "Save Changes"
 msgstr ""
 
-#: c2c-plugin.php:868
+#: c2c-plugin.php:924
 msgid "Reset Settings"
 msgstr ""
 
-#: c2c-plugin.php:874
+#: c2c-plugin.php:930
 msgid "Scott Reilly, aka coffee2code"
 msgstr ""
 
-#: c2c-plugin.php:875
+#: c2c-plugin.php:931
 msgid "This plugin brought to you by %s."
 msgstr ""
 
-#: c2c-plugin.php:876
+#: c2c-plugin.php:932
 msgid "Please consider a donation"
 msgstr ""
 
-#: c2c-plugin.php:877
+#: c2c-plugin.php:933
 msgid "Did you find this plugin useful?"
 msgstr ""
 
-#. #-#-#-#-#  obfuscate-email.pot (Obfuscate E-mail 3.2)  #-#-#-#-#
+#. #-#-#-#-#  obfuscate-email.pot (Obfuscate E-mail 3.3)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
-#: obfuscate-email.php:138 obfuscate-email.php:139
+#: obfuscate-email.php:137 obfuscate-email.php:138
 msgid "Obfuscate E-mail"
 msgstr ""
 
-#: obfuscate-email.php:143
+#: obfuscate-email.php:142
 msgid "Obfuscate entire e-mail address?"
 msgstr ""
 
-#: obfuscate-email.php:144
+#: obfuscate-email.php:143
 msgid ""
 "All characters of the e-mail address will be obfuscated using hexadecimal "
 "HTML entity substitution."
 msgstr ""
 
-#: obfuscate-email.php:146
+#: obfuscate-email.php:145
 msgid "Replacement for '<code>@</code>'"
 msgstr ""
 
-#: obfuscate-email.php:147
+#: obfuscate-email.php:146
 msgid ""
 "Only applicable if 'Obfuscate entire e-mail address?' is not checked.<br /"
 ">Ex. set this to '[at]' to get person[at]email.com<br />If applicable but "
@@ -121,11 +121,11 @@ msgid ""
 "will be used."
 msgstr ""
 
-#: obfuscate-email.php:149
+#: obfuscate-email.php:148
 msgid "Replacement for '<code>.</code>'"
 msgstr ""
 
-#: obfuscate-email.php:150
+#: obfuscate-email.php:149
 msgid ""
 "Only applicable if 'Obfuscate entire e-mail address?' is not checked.<br /"
 ">Ex. set this to '[dot]' to get person@email[dot]com<br />If applicable but "
@@ -133,11 +133,11 @@ msgid ""
 "will be used."
 msgstr ""
 
-#: obfuscate-email.php:152
+#: obfuscate-email.php:151
 msgid "Utilize CSS text direction technique?"
 msgstr ""
 
-#: obfuscate-email.php:153
+#: obfuscate-email.php:152
 msgid ""
 "This reverses the e-mail address strings as they appear in the markup and "
 "utilizes CSS to reverse the text back to the correct direction for visitors "
@@ -146,11 +146,11 @@ msgid ""
 "(via right-click menu) will work properly."
 msgstr ""
 
-#: obfuscate-email.php:155
+#: obfuscate-email.php:154
 msgid "Utilize CSS display:none technique?"
 msgstr ""
 
-#: obfuscate-email.php:156
+#: obfuscate-email.php:155
 msgid ""
 "This embeds extraneous text within e-mail address strings and then utilizes "
 "CSS to hide them so they don't appear to visitors."

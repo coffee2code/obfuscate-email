@@ -1,0 +1,223 @@
+<?php
+
+class Obfuscate_Email_Test extends WP_UnitTestCase {
+
+	function setUp() {
+		parent::setUp();
+		$this->set_option();
+	}
+
+
+
+	/*
+	 *
+	 * DATA PROVIDERS
+	 *
+	 */
+
+
+
+	public static function get_default_filters() {
+		return array(
+			array( 'link_description' ),
+			array( 'link_notes' ),
+			array( 'bloginfo' ),
+			array( 'nav_menu_description' ),
+			array( 'term_description' ),
+			array( 'the_title' ),
+			array( 'the_content' ),
+			array( 'get_the_excerpt' ),
+			array( 'comment_text' ),
+			array( 'list_cats' ),
+			array( 'widget_text' ),
+			array( 'the_author_email' ),
+			array( 'get_comment_author_email' ),
+		);
+	}
+
+
+
+	/*
+	 *
+	 * HELPER FUNCTIONS
+	 *
+	 */
+
+
+
+	private function set_option( $settings = array() ) {
+		$defaults = array(
+			'encode_everything'  => true,
+			'at_replace'         => '',
+			'dot_replace'        => '',
+			'use_text_direction' => false,
+			'use_display_none'   => true,
+		);
+		$settings = wp_parse_args( $settings, $defaults );
+		c2c_ObfuscateEmail::instance()->update_option( $settings, true );
+	}
+
+
+
+
+	/*
+	 *
+	 * TESTS
+	 *
+	 */
+
+
+
+	function test_class_exists() {
+		$this->assertTrue( class_exists( 'c2c_ObfuscateEmail' ) );
+	}
+
+	function test_plugin_framework_class_name() {
+		$this->assertTrue( class_exists( 'C2C_Plugin_039' ) );
+	}
+
+	function test_get_version() {
+		$this->assertEquals( '3.3', c2c_ObfuscateEmail::instance()->version() );
+	}
+
+	function test_instance_object_is_returned() {
+		$this->assertTrue( is_a( c2c_ObfuscateEmail::instance(), 'c2c_ObfuscateEmail' ) );
+	}
+
+	/**
+	 * @dataProvider get_default_filters
+	 */
+	function test_hooks_default_filters( $filter ) {
+		$this->assertNotFalse( has_filter( $filter, array( c2c_ObfuscateEmail::instance(), 'obfuscate_email' ), 15 ) );
+	}
+
+	/**
+	 * @dataProvider get_default_filters
+	 */
+	function test_obfuscation_applies_to_default_filters( $filter ) {
+		$email = 'test@example.com';
+		$expected = '&#x74;&#x65;&#x73;&#x74;&#x40;<span class="oe_displaynone">null</span>&#x65;&#x78;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#x2e;&#x63;&#x6f;&#x6d;';
+
+		$this->assertEquals( $expected, c2c_obfuscate_email( $email ) );
+	}
+
+	function test_at_and_dot_default_replace() {
+		$this->set_option( array(
+			'encode_everything'  => false,
+			'at_replace'         => '',
+			'dot_replace'        => '',
+			'use_text_direction' => false,
+			'use_display_none'   => false,
+		) );
+
+		$this->assertEquals( 'test&#064;example&#046;com', c2c_obfuscate_email( 'test@example.com' ) );
+	}
+
+	function test_custom_at_replace() {
+		$this->set_option( array(
+			'encode_everything'  => false,
+			'at_replace'         => 'AT',
+			'dot_replace'        => '',
+			'use_text_direction' => false,
+			'use_display_none'   => false,
+		) );
+
+		$this->assertEquals( 'testATexample&#046;com', c2c_obfuscate_email( 'test@example.com' ) );
+	}
+
+	function test_custom_dot_replace() {
+		$this->set_option( array(
+			'encode_everything'  => false,
+			'at_replace'         => '',
+			'dot_replace'        => 'DOT',
+			'use_text_direction' => false,
+			'use_display_none'   => false,
+		) );
+
+		$this->assertEquals( 'test&#064;exampleDOTcom', c2c_obfuscate_email( 'test@example.com' ) );
+	}
+
+	function test_text_direction() {
+		$this->set_option( array(
+			'encode_everything'  => false,
+			'at_replace'         => '',
+			'dot_replace'        => '',
+			'use_text_direction' => true,
+			'use_display_none'   => false,
+		) );
+
+		$this->assertEquals(
+			'<span class="oe_textdirection">moc&#046;elpmaxe&#064;tset</span>',
+			c2c_obfuscate_email( 'test@example.com' )
+		);
+	}
+
+	function test_display_none() {
+		$this->set_option( array(
+			'encode_everything'  => false,
+			'at_replace'         => '',
+			'dot_replace'        => '',
+			'use_text_direction' => false,
+			'use_display_none'   => true,
+		) );
+
+		$this->assertEquals(
+			'test&#064;<span class="oe_displaynone">null</span>example&#046;com',
+			c2c_obfuscate_email( 'test@example.com' )
+		);
+	}
+
+	function test_display_none_and_text_direction_and_at_and_dot_replace() {
+		$this->set_option( array(
+			'encode_everything'  => false,
+			'at_replace'         => 'AT',
+			'dot_replace'        => 'DOT',
+			'use_text_direction' => true,
+			'use_display_none'   => true,
+		) );
+
+		$this->assertEquals(
+			'<span class="oe_textdirection">mocTODelpmaxe<span class="oe_displaynone">null</span>TAtset</span>',
+			c2c_obfuscate_email( 'test@example.com' )
+		);
+	}
+
+	function test_encode_everything() {
+		$this->set_option( array(
+			'encode_everything'  => true,
+			'at_replace'         => '',
+			'dot_replace'        => '',
+			'use_text_direction' => false,
+			'use_display_none'   => false,
+		) );
+
+		$this->assertEquals(
+			'&#x74;&#x65;&#x73;&#x74;&#x40;&#x65;&#x78;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#x2e;&#x63;&#x6f;&#x6d;',
+			c2c_obfuscate_email( 'test@example.com' )
+		);
+	}
+
+	function test_everything_enabled() {
+		$this->set_option( array(
+			'encode_everything'  => true,
+			'at_replace'         => 'AT',
+			'dot_replace'        => 'DOT',
+			'use_text_direction' => true,
+			'use_display_none'   => true,
+		) );
+
+		$this->assertEquals(
+			'<span class="oe_textdirection">&#x6d;&#x6f;&#x63;&#x2e;&#x65;&#x6c;&#x70;&#x6d;&#x61;&#x78;&#x65;<span class="oe_displaynone">null</span>&#x40;&#x74;&#x73;&#x65;&#x74;</span>',
+			c2c_obfuscate_email( 'test@example.com' )
+		);
+	}
+
+	function test_uninstall_deletes_option() {
+		$option = 'c2c_remember_me_controls';
+		$x = get_option( $option );
+		c2c_ObfuscateEmail::uninstall();
+
+		$this->assertFalse( get_option( $option ) );
+	}
+
+}
