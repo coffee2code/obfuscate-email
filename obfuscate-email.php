@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Obfuscate E-mail
- * Version:     3.3
+ * Version:     3.4
  * Plugin URI:  http://coffee2code.com/wp-plugins/obfuscate-email/
  * Author:      Scott Reilly
  * Author URI:  http://coffee2code.com/
@@ -11,7 +11,7 @@
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  * Description: Obfuscate e-mail addresses to deter e-mail harvesting spammers, while retaining the appearance and functionality of hyperlinks.
  *
- * Compatible with WordPress 3.6+ through 4.1+.
+ * Compatible with WordPress 3.6+ through 4.2+.
  *
  * =>> Read the accompanying readme.txt file for instructions and documentation.
  * =>> Also, visit the plugin's homepage for additional information and updates.
@@ -19,7 +19,7 @@
  *
  * @package Obfuscate_Email
  * @author  Scott Reilly
- * @version 3.3
+ * @version 3.4
  */
 
 /*
@@ -103,7 +103,7 @@ final class c2c_ObfuscateEmail extends C2C_Plugin_039 {
 	 * Constructor.
 	 */
 	protected function __construct() {
-		parent::__construct( '3.3', 'obfuscate-email', 'c2c', __FILE__, array() );
+		parent::__construct( '3.4', 'obfuscate-email', 'c2c', __FILE__, array() );
 		register_activation_hook( __FILE__, array( __CLASS__, 'activation' ) );
 
 		return self::$instance = $this;
@@ -157,15 +157,26 @@ final class c2c_ObfuscateEmail extends C2C_Plugin_039 {
 	}
 
 	/**
-	 * Override the plugin framework's register_filters() to actually actions against filters.
+	 * Override the plugin framework's register_filters() to actually hook actions/filters.
 	 *
 	 * @since 3.0
+	 * @since 3.4 Don't do anything if in the admin area.
 	 */
 	public function register_filters() {
-		$filters = (array) apply_filters( 'c2c_obfuscate_email_filters', array(
-		 'link_description', 'link_notes', 'bloginfo', 'nav_menu_description',
-		 'term_description', 'the_title', 'the_content', 'get_the_excerpt', 'comment_text', 'list_cats', 'widget_text',
-		 'the_author_email', 'get_comment_author_email' ) );
+		// Don't obfuscate email addresses in the admin area.
+		if ( is_admin() ) {
+			return;
+		}
+
+		$filters = (array) apply_filters(
+			'c2c_obfuscate_email_filters',
+			array(
+				'link_description', 'link_notes', 'bloginfo', 'nav_menu_description',
+				'term_description', 'the_title', 'the_content', 'get_the_excerpt', 'comment_text', 'list_cats', 'widget_text',
+				'the_author_email', 'get_comment_author_email',
+			)
+		);
+
 		foreach( $filters as $filter ) {
 			add_filter( $filter, array( $this, 'obfuscate_email' ), 15 );
 		}

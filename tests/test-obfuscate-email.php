@@ -77,7 +77,7 @@ class Obfuscate_Email_Test extends WP_UnitTestCase {
 	}
 
 	function test_get_version() {
-		$this->assertEquals( '3.3', c2c_ObfuscateEmail::instance()->version() );
+		$this->assertEquals( '3.4', c2c_ObfuscateEmail::instance()->version() );
 	}
 
 	function test_instance_object_is_returned() {
@@ -218,6 +218,56 @@ class Obfuscate_Email_Test extends WP_UnitTestCase {
 		c2c_ObfuscateEmail::uninstall();
 
 		$this->assertFalse( get_option( $option ) );
+	}
+
+	/***
+	 * ALL ADMIN AREA RELATED TESTS NEED TO FOLLOW THIS FUNCTION
+	 ***/
+
+	function test_turn_on_admin() {
+		if ( ! defined( 'WP_ADMIN' ) ) {
+			define( 'WP_ADMIN', true );
+		}
+
+		// Unhook existing hooks. Then re-register them.
+		// Necessary due to the singleton nature of the object and where the
+		// is_admin() occurs.
+		foreach ( $this->get_default_filters() as $filter ) {
+			remove_filter( $filter[0], array( c2c_ObfuscateEmail::instance(), 'obfuscate_email' ), 15 );
+		}
+		remove_action( 'wp_head', array( c2c_ObfuscateEmail::instance(), 'add_css' ) );
+
+		c2c_ObfuscateEmail::instance()->register_filters();
+
+		$this->assertTrue( is_admin() );
+	}
+
+	/**
+	 * @dataProvider get_default_filters
+	 */
+	function test_does_not_hook_default_filters_in_admin( $filter ) {
+		$this->test_turn_on_admin();
+
+		$this->assertFalse( has_filter( $filter, array( c2c_ObfuscateEmail::instance(), 'obfuscate_email' ) ) );
+	}
+
+	function test_nothing_obfuscated_in_admin_even_with_everything_enabled() {
+		$this->set_option( array(
+			'encode_everything'  => true,
+			'at_replace'         => 'AT',
+			'dot_replace'        => 'DOT',
+			'use_text_direction' => true,
+			'use_display_none'   => true,
+		) );
+
+		$this->test_turn_on_admin();
+
+		$text = 'test@example.com';
+
+		$this->assertEquals(
+			wpautop( $text ),
+			apply_filters( 'the_content', $text )
+		);
 	}
 
 }

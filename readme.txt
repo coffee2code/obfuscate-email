@@ -5,8 +5,8 @@ Tags: email, obfuscation, security, spam, coffee2code
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 3.6
-Tested up to: 4.1
-Stable tag: 3.3
+Tested up to: 4.2
+Stable tag: 3.4
 
 Obfuscate e-mail addresses to deter e-mail harvesting spammers, while retaining the appearance and functionality of hyperlinks.
 
@@ -227,6 +227,12 @@ add_filter( 'c2c_obfuscate_email_filters', 'change_c2c_obfuscate_email_filters' 
 
 == Changelog ==
 
+= 3.4 (2015-04-22) =
+* Enhancement: Prevent email obfuscation from occurring in the admin area
+* Update: Add more unit tests
+* Update: Note compatibility through WP 4.2+
+* Update: Minor code formatting changes (spacing)
+
 = 3.3 (2015-03-02) =
 * Fix when using multi-character AT or DOT replacements in conjunction with text direction technique when not encoding everything
 * Use full path when requiring plugin framework file
@@ -336,6 +342,9 @@ add_filter( 'c2c_obfuscate_email_filters', 'change_c2c_obfuscate_email_filters' 
 
 
 == Upgrade Notice ==
+
+= 3.4 =
+Minor update: prevented email obfuscation from occurring in the admin area; noted compatibility through WP 4.2+
 
 = 3.3 =
 Minor update: minor fix; added unit tests; updated plugin framework to 039; noted compatibility through WP 4.1+; updated copyright date (2015); added plugin icon
