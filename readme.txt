@@ -1,12 +1,12 @@
 === Obfuscate E-mail ===
 Contributors: coffee2code
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6ARCFJ9TX3522
-Tags: email, obfuscation, security, spam, coffee2code
+Tags: email, obfuscate, obfuscation, security, spam, coffee2code
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
-Requires at least: 3.6
-Tested up to: 4.2
-Stable tag: 3.4
+Requires at least: 4.1
+Tested up to: 4.5
+Stable tag: 3.5
 
 Obfuscate e-mail addresses to deter e-mail harvesting spammers, while retaining the appearance and functionality of hyperlinks.
 
@@ -227,6 +227,29 @@ add_filter( 'c2c_obfuscate_email_filters', 'change_c2c_obfuscate_email_filters' 
 
 == Changelog ==
 
+= 3.5 (2016-04-04) =
+Highlights:
+* This release adds support for language packs and has some minor behind-the-scenes changes.
+
+Details:
+* Change: Update plugin framework to 041:
+    * Change class name to c2c_ObfuscateEmail_Plugin_041 to be plugin-specific.
+    * Set textdomain using a string instead of a variable.
+    * Don't load textdomain from file.
+    * Change admin page header from 'h2' to 'h1' tag.
+    * Add `c2c_plugin_version()`.
+    * Formatting improvements to inline docs.
+* Change: Add support for language packs:
+    * Set textdomain using a string instead of a variable.
+    * Remove .pot file and /lang subdirectory.
+    * Remove 'Domain Path' from plugin header.
+* New: Add LICENSE file.
+* New: Add empty index.php to prevent files from being listed if web server has enabled directory listings.
+* Change: Minor code reformatting.
+* Change: Note compatibility through WP 4.5+.
+* Change: Dropped compatibility with version of WP older than 4.1.
+* Change: Update copyright date (2016).
+
 = 3.4 (2015-04-22) =
 * Enhancement: Prevent email obfuscation from occurring in the admin area
 * Update: Add more unit tests
@@ -342,6 +365,9 @@ add_filter( 'c2c_obfuscate_email_filters', 'change_c2c_obfuscate_email_filters' 
 
 
 == Upgrade Notice ==
+
+= 3.5 =
+Minor update: improved support for localization; minor widget code changes; verified compatibility through WP 4.5; dropped compatibility with WP older than 4.1; updated copyright date (2016)
 
 = 3.4 =
 Minor update: prevented email obfuscation from occurring in the admin area; noted compatibility through WP 4.2+

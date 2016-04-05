@@ -1,17 +1,16 @@
 <?php
 /**
  * Plugin Name: Obfuscate E-mail
- * Version:     3.4
+ * Version:     3.5
  * Plugin URI:  http://coffee2code.com/wp-plugins/obfuscate-email/
  * Author:      Scott Reilly
  * Author URI:  http://coffee2code.com/
  * Text Domain: obfuscate-email
- * Domain Path: /lang/
  * License:     GPLv2 or later
  * License URI: http://www.gnu.org/licenses/gpl-2.0.html
  * Description: Obfuscate e-mail addresses to deter e-mail harvesting spammers, while retaining the appearance and functionality of hyperlinks.
  *
- * Compatible with WordPress 3.6+ through 4.2+.
+ * Compatible with WordPress 4.1+ through 4.5+.
  *
  * =>> Read the accompanying readme.txt file for instructions and documentation.
  * =>> Also, visit the plugin's homepage for additional information and updates.
@@ -19,7 +18,7 @@
  *
  * @package Obfuscate_Email
  * @author  Scott Reilly
- * @version 3.4
+ * @version 3.5
  */
 
 /*
@@ -40,7 +39,7 @@
  */
 
 /*
-	Copyright (c) 2005-2015 by Scott Reilly (aka coffee2code)
+	Copyright (c) 2005-2016 by Scott Reilly (aka coffee2code)
 
 	This program is free software; you can redistribute it and/or
 	modify it under the terms of the GNU General Public License
@@ -63,7 +62,7 @@ if ( ! class_exists( 'c2c_ObfuscateEmail' ) ) :
 
 require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'c2c-plugin.php' );
 
-final class c2c_ObfuscateEmail extends C2C_Plugin_039 {
+final class c2c_ObfuscateEmail extends c2c_ObfuscateEmail_Plugin_041 {
 
 	/**
 	 * The one true instance.
@@ -103,7 +102,7 @@ final class c2c_ObfuscateEmail extends C2C_Plugin_039 {
 	 * Constructor.
 	 */
 	protected function __construct() {
-		parent::__construct( '3.4', 'obfuscate-email', 'c2c', __FILE__, array() );
+		parent::__construct( '3.5', 'obfuscate-email', 'c2c', __FILE__, array() );
 		register_activation_hook( __FILE__, array( __CLASS__, 'activation' ) );
 
 		return self::$instance = $this;
@@ -134,25 +133,40 @@ final class c2c_ObfuscateEmail extends C2C_Plugin_039 {
 	 * @since 3.0
 	 */
 	public function load_config() {
-		$this->name      = __( 'Obfuscate E-mail', $this->textdomain );
-		$this->menu_name = __( 'Obfuscate E-mail', $this->textdomain );
+		$this->name      = __( 'Obfuscate E-mail', 'obfuscate-email' );
+		$this->menu_name = __( 'Obfuscate E-mail', 'obfuscate-email' );
 
 		$this->config = array(
-			'encode_everything' => array( 'input' => 'checkbox', 'default' => true,
-					'label' => __( 'Obfuscate entire e-mail address?', $this->textdomain ),
-					'help'  => __( 'All characters of the e-mail address will be obfuscated using hexadecimal HTML entity substitution.', $this->textdomain ) ),
-			'at_replace' => array('input' => 'text', 'default' => '',
-					'label' => __( 'Replacement for \'<code>@</code>\'', $this->textdomain ),
-					'help'  => __( 'Only applicable if \'Obfuscate entire e-mail address?\' is not checked.<br />Ex. set this to \'[at]\' to get person[at]email.com<br />If applicable but not defined, then <code>&amp;#064;</code> (which is the encoding for &#064;) will be used.', $this->textdomain ) ),
-			'dot_replace' => array( 'input' => 'text', 'default' => '',
-					'label' => __( 'Replacement for \'<code>.</code>\'', $this->textdomain ),
-					'help'  => __( 'Only applicable if \'Obfuscate entire e-mail address?\' is not checked.<br />Ex. set this to \'[dot]\' to get person@email[dot]com<br />If applicable but not defined, then <code>&amp;#046;</code> (which is the encoding for &#046;) will be used.', $this->textdomain ) ),
-			'use_text_direction' => array( 'input' => 'checkbox', 'default' => false,
-					'label' => __( 'Utilize CSS text direction technique?', $this->textdomain ),
-					'help'  => __( 'This reverses the e-mail address strings as they appear in the markup and utilizes CSS to reverse the text back to the correct direction for visitors to see/use. Note that copying-and-pasting of unlinked text e-mail addresses will result in the pasted text being reversed. Copying the e-mail address (via right-click menu) will work properly.', $this->textdomain ) ),
-			'use_display_none' => array( 'input' => 'checkbox', 'default' => true,
-					'label' => __( 'Utilize CSS display:none technique?', $this->textdomain ),
-					'help'  => __( 'This embeds extraneous text within e-mail address strings and then utilizes CSS to hide them so they don\'t appear to visitors.', $this->textdomain ) ),
+			'encode_everything' => array(
+				'input'   => 'checkbox',
+				'default' => true,
+				'label'   => __( 'Obfuscate entire e-mail address?', 'obfuscate-email' ),
+				'help'    => __( 'All characters of the e-mail address will be obfuscated using hexadecimal HTML entity substitution.', 'obfuscate-email' ),
+			),
+			'at_replace' => array(
+				'input'   => 'text',
+				'default' => '',
+				'label'   => __( 'Replacement for \'<code>@</code>\'', 'obfuscate-email' ),
+				'help'    => __( 'Only applicable if \'Obfuscate entire e-mail address?\' is not checked.<br />Ex. set this to \'[at]\' to get person[at]email.com<br />If applicable but not defined, then <code>&amp;#064;</code> (which is the encoding for &#064;) will be used.', 'obfuscate-email' ),
+			),
+			'dot_replace' => array(
+				'input'   => 'text',
+				'default' => '',
+				'label'   => __( 'Replacement for \'<code>.</code>\'', 'obfuscate-email' ),
+				'help'    => __( 'Only applicable if \'Obfuscate entire e-mail address?\' is not checked.<br />Ex. set this to \'[dot]\' to get person@email[dot]com<br />If applicable but not defined, then <code>&amp;#046;</code> (which is the encoding for &#046;) will be used.', 'obfuscate-email' ),
+			),
+			'use_text_direction' => array(
+				'input'   => 'checkbox',
+				'default' => false,
+				'label'   => __( 'Utilize CSS text direction technique?', 'obfuscate-email' ),
+				'help'    => __( 'This reverses the e-mail address strings as they appear in the markup and utilizes CSS to reverse the text back to the correct direction for visitors to see/use. Note that copying-and-pasting of unlinked text e-mail addresses will result in the pasted text being reversed. Copying the e-mail address (via right-click menu) will work properly.', 'obfuscate-email' ),
+			),
+			'use_display_none' => array(
+				'input'   => 'checkbox',
+				'default' => true,
+				'label'   => __( 'Utilize CSS display:none technique?', 'obfuscate-email' ),
+				'help'    => __( 'This embeds extraneous text within e-mail address strings and then utilizes CSS to hide them so they don\'t appear to visitors.', 'obfuscate-email' ),
+			),
 		);
 	}
 
@@ -185,7 +199,7 @@ final class c2c_ObfuscateEmail extends C2C_Plugin_039 {
 	}
 
 	/**
-	 * Outputs CSS.
+	 * Output CSS.
 	 */
 	public function add_css() {
 		echo <<<HTML
@@ -207,7 +221,7 @@ HTML;
 	public function obfuscate_email( $text, $args = array() ) {
 		$options = $this->get_options();
 
-		if ( ! empty( $args ) ) {
+		if ( $args ) {
 			$options = $this->options = wp_parse_args( $args, $options );
 		}
 

@@ -1,20 +1,20 @@
 <?php
 
+defined( 'ABSPATH' ) or die();
+
 class Obfuscate_Email_Test extends WP_UnitTestCase {
 
-	function setUp() {
+	public function setUp() {
 		parent::setUp();
 		$this->set_option();
 	}
 
 
-
-	/*
-	 *
-	 * DATA PROVIDERS
-	 *
-	 */
-
+	//
+	//
+	// DATA PROVIDERS
+	//
+	//
 
 
 	public static function get_default_filters() {
@@ -36,13 +36,11 @@ class Obfuscate_Email_Test extends WP_UnitTestCase {
 	}
 
 
-
-	/*
-	 *
-	 * HELPER FUNCTIONS
-	 *
-	 */
-
+	//
+	//
+	// HELPER FUNCTIONS
+	//
+	//
 
 
 	private function set_option( $settings = array() ) {
@@ -58,50 +56,51 @@ class Obfuscate_Email_Test extends WP_UnitTestCase {
 	}
 
 
+	//
+	//
+	// TESTS
+	//
+	//
 
 
-	/*
-	 *
-	 * TESTS
-	 *
-	 */
-
-
-
-	function test_class_exists() {
+	public function test_class_exists() {
 		$this->assertTrue( class_exists( 'c2c_ObfuscateEmail' ) );
 	}
 
-	function test_plugin_framework_class_name() {
-		$this->assertTrue( class_exists( 'C2C_Plugin_039' ) );
+	public function test_get_version() {
+		$this->assertEquals( '3.5', c2c_ObfuscateEmail::instance()->version() );
 	}
 
-	function test_get_version() {
-		$this->assertEquals( '3.4', c2c_ObfuscateEmail::instance()->version() );
+	public function test_plugin_framework_class_name() {
+		$this->assertTrue( class_exists( 'c2c_ObfuscateEmail_Plugin_041' ) );
 	}
 
-	function test_instance_object_is_returned() {
+	public function test_plugin_framework_version() {
+		$this->assertEquals( '041', c2c_ObfuscateEmail::instance()->c2c_plugin_version() );
+	}
+
+	public function test_instance_object_is_returned() {
 		$this->assertTrue( is_a( c2c_ObfuscateEmail::instance(), 'c2c_ObfuscateEmail' ) );
 	}
 
 	/**
 	 * @dataProvider get_default_filters
 	 */
-	function test_hooks_default_filters( $filter ) {
+	public function test_hooks_default_filters( $filter ) {
 		$this->assertNotFalse( has_filter( $filter, array( c2c_ObfuscateEmail::instance(), 'obfuscate_email' ), 15 ) );
 	}
 
 	/**
 	 * @dataProvider get_default_filters
 	 */
-	function test_obfuscation_applies_to_default_filters( $filter ) {
+	public function test_obfuscation_applies_to_default_filters( $filter ) {
 		$email = 'test@example.com';
 		$expected = '&#x74;&#x65;&#x73;&#x74;&#x40;<span class="oe_displaynone">null</span>&#x65;&#x78;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#x2e;&#x63;&#x6f;&#x6d;';
 
 		$this->assertEquals( $expected, c2c_obfuscate_email( $email ) );
 	}
 
-	function test_at_and_dot_default_replace() {
+	public function test_at_and_dot_default_replace() {
 		$this->set_option( array(
 			'encode_everything'  => false,
 			'at_replace'         => '',
@@ -113,7 +112,7 @@ class Obfuscate_Email_Test extends WP_UnitTestCase {
 		$this->assertEquals( 'test&#064;example&#046;com', c2c_obfuscate_email( 'test@example.com' ) );
 	}
 
-	function test_custom_at_replace() {
+	public function test_custom_at_replace() {
 		$this->set_option( array(
 			'encode_everything'  => false,
 			'at_replace'         => 'AT',
@@ -125,7 +124,7 @@ class Obfuscate_Email_Test extends WP_UnitTestCase {
 		$this->assertEquals( 'testATexample&#046;com', c2c_obfuscate_email( 'test@example.com' ) );
 	}
 
-	function test_custom_dot_replace() {
+	public function test_custom_dot_replace() {
 		$this->set_option( array(
 			'encode_everything'  => false,
 			'at_replace'         => '',
@@ -137,7 +136,7 @@ class Obfuscate_Email_Test extends WP_UnitTestCase {
 		$this->assertEquals( 'test&#064;exampleDOTcom', c2c_obfuscate_email( 'test@example.com' ) );
 	}
 
-	function test_text_direction() {
+	public function test_text_direction() {
 		$this->set_option( array(
 			'encode_everything'  => false,
 			'at_replace'         => '',
@@ -152,7 +151,7 @@ class Obfuscate_Email_Test extends WP_UnitTestCase {
 		);
 	}
 
-	function test_display_none() {
+	public function test_display_none() {
 		$this->set_option( array(
 			'encode_everything'  => false,
 			'at_replace'         => '',
@@ -167,7 +166,7 @@ class Obfuscate_Email_Test extends WP_UnitTestCase {
 		);
 	}
 
-	function test_display_none_and_text_direction_and_at_and_dot_replace() {
+	public function test_display_none_and_text_direction_and_at_and_dot_replace() {
 		$this->set_option( array(
 			'encode_everything'  => false,
 			'at_replace'         => 'AT',
@@ -182,7 +181,7 @@ class Obfuscate_Email_Test extends WP_UnitTestCase {
 		);
 	}
 
-	function test_encode_everything() {
+	public function test_encode_everything() {
 		$this->set_option( array(
 			'encode_everything'  => true,
 			'at_replace'         => '',
@@ -197,7 +196,7 @@ class Obfuscate_Email_Test extends WP_UnitTestCase {
 		);
 	}
 
-	function test_everything_enabled() {
+	public function test_everything_enabled() {
 		$this->set_option( array(
 			'encode_everything'  => true,
 			'at_replace'         => 'AT',
@@ -212,9 +211,10 @@ class Obfuscate_Email_Test extends WP_UnitTestCase {
 		);
 	}
 
-	function test_uninstall_deletes_option() {
-		$option = 'c2c_remember_me_controls';
-		$x = get_option( $option );
+	public function test_uninstall_deletes_option() {
+		$option = 'c2c_obfuscate_email';
+		c2c_ObfuscateEmail::instance()->get_options();
+
 		c2c_ObfuscateEmail::uninstall();
 
 		$this->assertFalse( get_option( $option ) );
@@ -224,7 +224,7 @@ class Obfuscate_Email_Test extends WP_UnitTestCase {
 	 * ALL ADMIN AREA RELATED TESTS NEED TO FOLLOW THIS FUNCTION
 	 ***/
 
-	function test_turn_on_admin() {
+	public function test_turn_on_admin() {
 		if ( ! defined( 'WP_ADMIN' ) ) {
 			define( 'WP_ADMIN', true );
 		}
@@ -245,13 +245,13 @@ class Obfuscate_Email_Test extends WP_UnitTestCase {
 	/**
 	 * @dataProvider get_default_filters
 	 */
-	function test_does_not_hook_default_filters_in_admin( $filter ) {
+	public function test_does_not_hook_default_filters_in_admin( $filter ) {
 		$this->test_turn_on_admin();
 
 		$this->assertFalse( has_filter( $filter, array( c2c_ObfuscateEmail::instance(), 'obfuscate_email' ) ) );
 	}
 
-	function test_nothing_obfuscated_in_admin_even_with_everything_enabled() {
+	public function test_nothing_obfuscated_in_admin_even_with_everything_enabled() {
 		$this->set_option( array(
 			'encode_everything'  => true,
 			'at_replace'         => 'AT',
