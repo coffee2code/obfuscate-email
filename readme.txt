@@ -241,12 +241,15 @@ add_filter( 'c2c_obfuscate_email_filters', 'change_c2c_obfuscate_email_filters' 
     * Update `disable_update_check()` to check for HTTP and HTTPS for plugin update check API URL.
     * Translate "Donate" in footer message.
     * Note compatibility through WP 4.5.
+* Bugfix: Add appropriate spacing so v3.5's changelog entry gets properly parsed. Props szepeviktor.
 
 = 3.5 (2016-04-04) =
 Highlights:
+
 * This release adds support for language packs and has some minor behind-the-scenes changes.
 
 Details:
+
 * Change: Update plugin framework to 041:
     * Change class name to c2c_ObfuscateEmail_Plugin_041 to be plugin-specific.
     * Set textdomain using a string instead of a variable.
