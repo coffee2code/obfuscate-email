@@ -6,7 +6,7 @@ License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 4.1
 Tested up to: 4.5
-Stable tag: 3.5
+Stable tag: 3.5.1
 
 Obfuscate email addresses to deter email harvesting spammers, while retaining the appearance and functionality of hyperlinks.
 
@@ -227,7 +227,7 @@ add_filter( 'c2c_obfuscate_email_filters', 'change_c2c_obfuscate_email_filters' 
 
 == Changelog ==
 
-= () =
+= 3.5.1 (2016-06-13) =
 * Change: Update plugin framework to 044:
     * 044
     * Add `reset_caches()` to clear caches and memoized data. Use it in `reset_options()` and `verify_config()`.
@@ -384,6 +384,9 @@ Details:
 
 
 == Upgrade Notice ==
+
+= 3.5.1 =
+Minor update: updated plugin framework to 044; fixed display of changelog; used "email" instead of "e-mail" everywhere
 
 = 3.5 =
 Minor update: improved support for localization; minor widget code changes; verified compatibility through WP 4.5; dropped compatibility with WP older than 4.1; updated copyright date (2016)
