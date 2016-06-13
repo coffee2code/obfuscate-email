@@ -62,7 +62,7 @@ if ( ! class_exists( 'c2c_ObfuscateEmail' ) ) :
 
 require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'c2c-plugin.php' );
 
-final class c2c_ObfuscateEmail extends c2c_ObfuscateEmail_Plugin_041 {
+final class c2c_ObfuscateEmail extends c2c_ObfuscateEmail_Plugin_044 {
 
 	/**
 	 * The one true instance.

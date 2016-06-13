@@ -72,11 +72,11 @@ class Obfuscate_Email_Test extends WP_UnitTestCase {
 	}
 
 	public function test_plugin_framework_class_name() {
-		$this->assertTrue( class_exists( 'c2c_ObfuscateEmail_Plugin_041' ) );
+		$this->assertTrue( class_exists( 'c2c_ObfuscateEmail_Plugin_044' ) );
 	}
 
 	public function test_plugin_framework_version() {
-		$this->assertEquals( '041', c2c_ObfuscateEmail::instance()->c2c_plugin_version() );
+		$this->assertEquals( '044', c2c_ObfuscateEmail::instance()->c2c_plugin_version() );
 	}
 
 	public function test_instance_object_is_returned() {

@@ -227,6 +227,21 @@ add_filter( 'c2c_obfuscate_email_filters', 'change_c2c_obfuscate_email_filters' 
 
 == Changelog ==
 
+= () =
+* Change: Update plugin framework to 044:
+    * 044
+    * Add `reset_caches()` to clear caches and memoized data. Use it in `reset_options()` and `verify_config()`.
+    * Add `verify_options()` with logic extracted from `verify_config()` for initializing default option attributes.
+    * Add  `add_option()` to add a new option to the plugin's configuration.
+    * Add filter 'sanitized_option_names' to allow modifying the list of whitelisted option names.
+    * Change: Refactor `get_option_names()`.
+    * 043
+    * Disregard invalid lines supplied as part of hash option value.
+    * 042
+    * Update `disable_update_check()` to check for HTTP and HTTPS for plugin update check API URL.
+    * Translate "Donate" in footer message.
+    * Note compatibility through WP 4.5.
+
 = 3.5 (2016-04-04) =
 Highlights:
 * This release adds support for language packs and has some minor behind-the-scenes changes.
