@@ -1,4 +1,4 @@
-=== Obfuscate E-mail ===
+=== Obfuscate Email ===
 Contributors: coffee2code
 Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=6ARCFJ9TX3522
 Tags: email, obfuscate, obfuscation, security, spam, coffee2code
@@ -8,15 +8,15 @@ Requires at least: 4.1
 Tested up to: 4.5
 Stable tag: 3.5
 
-Obfuscate e-mail addresses to deter e-mail harvesting spammers, while retaining the appearance and functionality of hyperlinks.
+Obfuscate email addresses to deter email harvesting spammers, while retaining the appearance and functionality of hyperlinks.
 
 == Description ==
 
-Obfuscate e-mail addresses to deter e-mail harvesting spammers, while retaining the appearance and functionality of hyperlinks.
+Obfuscate email addresses to deter email harvesting spammers, while retaining the appearance and functionality of hyperlinks.
 
-"Obfuscation" simply means that techniques are employed to modify e-mail address strings that appear on your site in such a way that bots scraping your site are unable to identify those addresses; however, at the same time those e-mails addresses should still look and work correctly for visitors, as much as possible.
+"Obfuscation" simply means that techniques are employed to modify email address strings that appear on your site in such a way that bots scraping your site are unable to identify those addresses; however, at the same time those emails addresses should still look and work correctly for visitors, as much as possible.
 
-The plugin allows for use of one or more (or all!) of three proven techniques for email protection. While techniques abound for e-mail obfuscation, the three techniques included empirically provide you with the best balance of e-mail address protection with minimal impact on visitors. You can decide on a technique by technique basis which ones you'd like to employ as some have potential drawbacks. The plugin's settings page allows you select which techniques to use.
+The plugin allows for use of one or more (or all!) of three proven techniques for email protection. While techniques abound for email obfuscation, the three techniques included empirically provide you with the best balance of email address protection with minimal impact on visitors. You can decide on a technique by technique basis which ones you'd like to employ as some have potential drawbacks. The plugin's settings page allows you select which techniques to use.
 
 See Filters section for `c2c_obfuscate_email_filters` for complete list of filters that are processed.
 
@@ -25,11 +25,11 @@ Please read the Details section of this documentation to learn more about the te
 
 == Details ==
 
-The e-mail obfuscation techniques included in this plugin were chosen for their effectiveness and general applicability with minimal impact on users. I urge you to read about an [experiment](http://techblog.tilllate.com/2008/07/20/ten-methods-to-obfuscate-e-mail-addresses-compared/) performed by Silvan Mühlemann in which he protected e-mail addresses using nine different techniques. He ensured the page containing those e-mail addresses got indexed by Google and then waited 1.5 years. During that time he measured the amount of spam received to each of the e-mail addresses.
+The email obfuscation techniques included in this plugin were chosen for their effectiveness and general applicability with minimal impact on users. I urge you to read about an [experiment](http://techblog.tilllate.com/2008/07/20/ten-methods-to-obfuscate-e-mail-addresses-compared/) performed by Silvan Mühlemann in which he protected email addresses using nine different techniques. He ensured the page containing those email addresses got indexed by Google and then waited 1.5 years. During that time he measured the amount of spam received to each of the email addresses.
 
-Three techniques stood out as having received *zero* spam e-mails during that time. Two of those three techniques are included in this plugin. The fourth of his techniques is also included even though it did get a very small amount of spam -- the technique was still very effective and more importantly does not rely on users to have CSS or JavaScript enabled.
+Three techniques stood out as having received *zero* spam emails during that time. Two of those three techniques are included in this plugin. The fourth of his techniques is also included even though it did get a very small amount of spam -- the technique was still very effective and more importantly does not rely on users to have CSS or JavaScript enabled.
 
-The techniques are as follows. Two are enabled by default. Weigh the requirements against what you're comfortable requiring of visitors in order for them to see and make use of e-mail addresses you post on your site.
+The techniques are as follows. Two are enabled by default. Weigh the requirements against what you're comfortable requiring of visitors in order for them to see and make use of email addresses you post on your site.
 
 (For all the examples below, assume you have the link `<a href="mailto:person@example.com">person@example.com</a>` in your post.)
 
@@ -41,7 +41,7 @@ The techniques are as follows. Two are enabled by default. Weigh the requirement
 
 * *Uses JavasScript?* No.
 
-* *Can visitor copy-n-paste the link from onscreen text without needing to make modifications?* No, text copied in such a manner will be reversed. However, a right-click -> "copy link/email address" will work properly for linked e-mail addresses.
+* *Can visitor copy-n-paste the link from onscreen text without needing to make modifications?* No, text copied in such a manner will be reversed. However, a right-click -> "copy link/email address" will work properly for linked email addresses.
 
 * *Does this protect emails appearing in mailto: links and within HTML tag attributes?* No.
 
@@ -97,9 +97,9 @@ If all techniques are enabled at once, the resulting obfuscation of the example 
 `<a href="mailto:&#x70;&#x65;&#x72;&#x73;&#x6f;&#x6e;&#x40;&#x65;&#x78;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#x2e;&#x63;&#x6f;&#x6d;"><span class="codedirection">&#x6d;&#x6f;&#x63;&#x2e;&#x65;&#x6c;&#x70;&#x6d;&#x61;&#x78;&#x65;<span class="displaynone">null</span>&#x40;&#x6e;&#x6f;&#x73;&#x72;&#x65;&#x70;</span></a>`
 
 
-However, in your browser it would appear to you as it does prior to obfuscation, and the link for the e-mail would still work. Theoretically, however, spammers would have a somewhat more difficult time harvesting the e-mails you display or link to in your posts.
+However, in your browser it would appear to you as it does prior to obfuscation, and the link for the email would still work. Theoretically, however, spammers would have a somewhat more difficult time harvesting the emails you display or link to in your posts.
 
-NOTE: (Only when using the custom replacement feature will visitors need to modify the e-mail address for use in their e-mail program.)
+NOTE: (Only when using the custom replacement feature will visitors need to modify the email address for use in their email program.)
 
 Links: [Plugin Homepage](http://coffee2code.com/wp-plugins/obfuscate-email/) | [Plugin Directory Page](https://wordpress.org/plugins/obfuscate-email/) | [Author Homepage](http://coffee2code.com)
 
@@ -114,19 +114,19 @@ Links: [Plugin Homepage](http://coffee2code.com/wp-plugins/obfuscate-email/) | [
 
 == Frequently Asked Questions ==
 
-= So it'll be impossible for spammers to harvest my site for e-mail addresses? =
+= So it'll be impossible for spammers to harvest my site for email addresses? =
 
 Of course nothing is guaranteed. By its very definition, "obfuscate" means "to make obscure or unclear", and that's all it's really doing. It's some degree of basic protection, which is better than nothing. Much as how locks in real-life at best provide some measure of deterrent for a would-be criminal rather than absolute security from a determined and capable individual. That said, some testing (as described elsewhere in this documentation) indicates using one or more of the supplied techniques are extremely effective.
 
-= Aren't there better methods of e-mail obfuscation? =
+= Aren't there better methods of email obfuscation? =
 
-Nothing short of not actually displaying e-mail addresses can guarantee that e-mail addresses can't get harvested. Some methods are more aggressive and therefore have compatibility and/or usability issues. This plugin can be very compatible and usable by all visitors to your site, but also has allowances for greater protection with minimal impact (though how minimal is for you to judge).
+Nothing short of not actually displaying email addresses can guarantee that email addresses can't get harvested. Some methods are more aggressive and therefore have compatibility and/or usability issues. This plugin can be very compatible and usable by all visitors to your site, but also has allowances for greater protection with minimal impact (though how minimal is for you to judge).
 
-= Does this plugin make use of JavaScript as other e-mail obfuscators do?
+= Does this plugin make use of JavaScript as other email obfuscators do?
 
 No. This makes this plugin's implementation of obfuscation more compatible and usable by more visitors. This may leave out techniques that some could argue are aggressively protective, but I feel (based on the aforementioned study and personal experience) that the included techniques are just as effective.
 
-= This plugin provides multiple techniques for e-mail obfuscation; can I apply more than one at once for even greater protection? =
+= This plugin provides multiple techniques for email obfuscation; can I apply more than one at once for even greater protection? =
 
 Yes, all techniques can be activated at once (and multiple ones are by default).
 
@@ -159,23 +159,23 @@ The plugin provides one optional template tag for use in your theme templates.
 = Arguments =
 
 * `$text`
-Required argument. The text and/or HTML that contains e-mail addresses that you want to be obfuscated.
+Required argument. The text and/or HTML that contains email addresses that you want to be obfuscated.
 
 * `$args`
 Optional argument. An array of configuration options, each element of which will override the plugin's corresponding default setting.
-    * encode_everything (boolean) : Encode all characters in the e-mail address using hexadecimal HTML entity substitution?
+    * encode_everything (boolean) : Encode all characters in the email address using hexadecimal HTML entity substitution?
     * use_text_direction (boolean) : Utilize CSS text direction technique?
     * use_display_none (boolean) : Utilize CSS display:none technique?
-    * at_replace (string) : String to use in place of `@` in e-mail addresses (used only if encode_everything is false)
-    * dot_replace (string) : String to use in place of `.` in e-mail addresses (used only if encode_everything is false)
+    * at_replace (string) : String to use in place of `@` in email addresses (used only if encode_everything is false)
+    * dot_replace (string) : String to use in place of `.` in email addresses (used only if encode_everything is false)
 
 = Examples =
 
-* Basic usage. Obfuscate e-mail addresses in $text according to current plugin settings.
+* Basic usage. Obfuscate email addresses in $text according to current plugin settings.
 
 `<?php echo c2c_obfuscate_email( $text ); ?>`
 
-* Override all plugin default settings when obfuscating e-mail addresses in $text and just use text direction technique.
+* Override all plugin default settings when obfuscating email addresses in $text and just use text direction technique.
 
 `<?php echo c2c_obfuscate_email( $text, array(
   array('use_text_direction' => true, 'use_display_none' => false, 'encode_everything' => false, 'at_replace' => '', 'dot_replace' => '')
@@ -241,6 +241,7 @@ add_filter( 'c2c_obfuscate_email_filters', 'change_c2c_obfuscate_email_filters' 
     * Update `disable_update_check()` to check for HTTP and HTTPS for plugin update check API URL.
     * Translate "Donate" in footer message.
     * Note compatibility through WP 4.5.
+* Change: Use "email" instead of "e-mail" in plugin's name, description, and documentation.
 * Bugfix: Add appropriate spacing so v3.5's changelog entry gets properly parsed. Props szepeviktor.
 
 = 3.5 (2016-04-04) =
