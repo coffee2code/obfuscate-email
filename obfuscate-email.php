@@ -24,6 +24,8 @@
 /*
  * TODO:
  *
+ * - Hook or constant to prevent inline CSS from being output. If so, add FAQ about it and show example default CSS rules.
+ *   If not, add an FAQ showing the code snippet to disable output of default inline CSS.
  * - Filter to override class names used 'oe_textdirection', 'oe_displaynone'
  * - Consider obscuring "mailto:" as well?
  * - Have regexp account for possible spaces around email in attrib. i.e. href="mailto: joe@example.com "
