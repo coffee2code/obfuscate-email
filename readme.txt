@@ -5,7 +5,7 @@ Tags: email, obfuscate, obfuscation, security, spam, coffee2code
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 4.1
-Tested up to: 4.5
+Tested up to: 5.1
 Stable tag: 3.5.1
 
 Obfuscate email addresses to deter email harvesting spammers, while retaining the appearance and functionality of hyperlinks.
