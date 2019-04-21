@@ -7,7 +7,7 @@
  * Author URI:  http://coffee2code.com/
  * Text Domain: obfuscate-email
  * License:     GPLv2 or later
- * License URI: http://www.gnu.org/licenses/gpl-2.0.html
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Description: Obfuscate email addresses to deter email harvesting spammers, while retaining the appearance and functionality of hyperlinks.
  *
  * Compatible with WordPress 4.1+ through 4.5+.

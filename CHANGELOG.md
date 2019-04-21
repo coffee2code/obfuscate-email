@@ -2,6 +2,7 @@
 
 ## _(in-progress)_
 * New: Add CHANGELOG.md file and move all but most recent changelog entries into it
+* Change: Update License URI to be HTTPS
 
 ## 3.5.1 _(2016-06-13)_
 * Change: Update plugin framework to 044:
