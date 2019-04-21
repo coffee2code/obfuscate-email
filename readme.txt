@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: email, obfuscate, obfuscation, security, spam, coffee2code
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
-Requires at least: 4.1
+Requires at least: 4.7
 Tested up to: 5.1
 Stable tag: 3.5.1
 
