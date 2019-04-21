@@ -101,7 +101,7 @@ However, in your browser it would appear to you as it does prior to obfuscation,
 
 NOTE: (Only when using the custom replacement feature will visitors need to modify the email address for use in their email program.)
 
-Links: [Plugin Homepage](http://coffee2code.com/wp-plugins/obfuscate-email/) | [Plugin Directory Page](https://wordpress.org/plugins/obfuscate-email/) | [Author Homepage](http://coffee2code.com)
+Links: [Plugin Homepage](http://coffee2code.com/wp-plugins/obfuscate-email/) | [Plugin Directory Page](https://wordpress.org/plugins/obfuscate-email/) | [GitHub](https://github.com/coffee2code/obfuscate-email/) | [Author Homepage](http://coffee2code.com)
 
 
 == Installation ==

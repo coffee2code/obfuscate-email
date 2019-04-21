@@ -2,6 +2,7 @@
 
 ## _(in-progress)_
 * New: Add CHANGELOG.md file and move all but most recent changelog entries into it
+* New: Add GitHub link to readme
 * Change: Note compatibility through WP 5.1+
 * Change: Drop compatibility with version of WP older than 4.7
 * Change: Update copyright date (2019)
