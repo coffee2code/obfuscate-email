@@ -3,6 +3,7 @@
 ## _(in-progress)_
 * New: Add README.md file
 * New: Add CHANGELOG.md file and move all but most recent changelog entries into it
+* New: Add inline documentation for hook
 * New: Add GitHub link to readme
 * Unit tests:
     * Change: Default `WP_TESTS_DIR` to `/tmp/wordpress-tests-lib` rather than erroring out if not defined via environment variable

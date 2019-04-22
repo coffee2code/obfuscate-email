@@ -184,6 +184,13 @@ final class c2c_ObfuscateEmail extends c2c_ObfuscateEmail_Plugin_044 {
 			return;
 		}
 
+		/**
+		 * Filters the list of filters processed by the plugin.
+		 *
+		 * @since 3.0
+		 *
+		 * @param array $filters The array of filters.
+		 */
 		$filters = (array) apply_filters(
 			'c2c_obfuscate_email_filters',
 			array(
