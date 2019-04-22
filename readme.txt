@@ -182,9 +182,9 @@ Optional argument. An array of configuration options, each element of which will
 ) ); ?>`
 
 
-== Filters ==
+== Hooks ==
 
-The plugin exposes one filter for hooking. Typically, customizations utilizing this hook would be put into your active theme's functions.php file, or used by another plugin.
+The plugin exposes one filter for hooking. Typically, code making use of filters should ideally be put into a mu-plugin or site-specific plugin (which is beyond the scope of this readme to explain).
 
 = c2c_obfuscate_email_filters (filter) =
 
