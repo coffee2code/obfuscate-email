@@ -107,7 +107,7 @@ Links: [Plugin Homepage](http://coffee2code.com/wp-plugins/obfuscate-email/) | [
 == Installation ==
 
 1. Whether installing or updating, whether this plugin or any other, it is always advisable to back-up your data before starting
-1. Unzip `obfuscate-email.zip` inside the `/wp-content/plugins/` directory for your site (or install via the built-in WordPress plugin installer)
+1. Install via the built-in WordPress plugin installer. Or download and unzip `obfuscate-email.zip` inside the plugins directory for your site (typically `wp-content/plugins/`)
 1. Activate the plugin through the 'Plugins' admin menu in WordPress
 1. Go to `Settings` -> `Obfuscate E-mail` admin options page (which you can also get to via the Settings link next to the plugin on the Manage Plugins page) and optionally customize the settings.
 
