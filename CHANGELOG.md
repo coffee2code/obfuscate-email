@@ -6,6 +6,7 @@
 * New: Add GitHub link to readme
 * Unit tests:
     * Change: Default `WP_TESTS_DIR` to `/tmp/wordpress-tests-lib` rather than erroring out if not defined via environment variable
+    * Change: Enable more error output for unit tests
 * Change: Note compatibility through WP 5.1+
 * Change: Drop compatibility with version of WP older than 4.7
 * Change: Update copyright date (2019)
