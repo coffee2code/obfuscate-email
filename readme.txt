@@ -186,7 +186,7 @@ Optional argument. An array of configuration options, each element of which will
 
 The plugin exposes one filter for hooking. Typically, code making use of filters should ideally be put into a mu-plugin or site-specific plugin (which is beyond the scope of this readme to explain).
 
-= c2c_obfuscate_email_filters (filter) =
+**c2c_obfuscate_email_filters (filter)**
 
 The 'c2c_obfuscate_email_filters' filter allows you to customize what filters to hook to be filtered with email obfuscation. The following filters are all filtered by default:
 
