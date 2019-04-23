@@ -38,6 +38,12 @@
  *   *Can visitor copy-n-paste the link from onscreen text without needing to make modifications?* Yes (unless they have JavaScript disabled).
  *   *Does this protect emails appearing in mailto: links and within HTML tag attributes?* Yes.
  *   *How effective is this?* In the aforementioned experiment, no spam emails were received when using just this technique.
+ * - Add support for CSS before/after technique:
+ *       <style>
+ *       my-email::after { content: attr(data-domain); }
+ *       my-email::before { content: attr(data-user); }
+ *       </style>
+ *       <my-email data-user="myemail" data-domain="mydomain.com">@</my-email>
  */
 
 /*
