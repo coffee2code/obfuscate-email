@@ -83,6 +83,10 @@ class Obfuscate_Email_Test extends WP_UnitTestCase {
 		$this->assertTrue( is_a( c2c_ObfuscateEmail::instance(), 'c2c_ObfuscateEmail' ) );
 	}
 
+	public function test_hooks_plugins_loaded() {
+		$this->assertEquals( 10, has_action( 'plugins_loaded', array( 'c2c_ObfuscateEmail', 'instance' ) ) );
+	}
+
 	/**
 	 * @dataProvider get_default_filters
 	 */

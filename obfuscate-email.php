@@ -339,7 +339,7 @@ HTML;
 
 } // end c2c_ObfuscateEmail
 
-c2c_ObfuscateEmail::instance();
+add_action( 'plugins_loaded', array( 'c2c_ObfuscateEmail', 'instance' ) );
 
 endif; // end if !class_exists()
 
