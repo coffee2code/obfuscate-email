@@ -188,7 +188,7 @@ The plugin exposes one filter for hooking. Typically, code making use of filters
 
 **c2c_obfuscate_email_filters (filter)**
 
-The 'c2c_obfuscate_email_filters' filter allows you to customize what filters to hook to be filtered with email obfuscation. The following filters are all filtered by default:
+The 'c2c_obfuscate_email_filters' filter allows you to customize what filters get processed for email obfuscation. The following filters are all filtered by default:
 
 * link_description
 * link_notes
