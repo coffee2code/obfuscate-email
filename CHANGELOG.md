@@ -1,6 +1,13 @@
 # Changelog
 
-## _(in-progress)_
+## 3.6 _(2019-04-22)_
+
+### Highlights:
+
+This release is a minor update that verifies compatibility through WordPress 5.1+, drops compatibility with versions of WordPress older than 4.7, and makes minor behind-the-scenes improvements.
+
+### Details:
+
 * Change: Initialize plugin on `plugins_loaded` action instead of on load
 * Change: Update plugin framework to 049
     * 049:

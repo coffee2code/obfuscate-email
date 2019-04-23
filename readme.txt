@@ -6,7 +6,7 @@ License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 4.7
 Tested up to: 5.1
-Stable tag: 3.5.1
+Stable tag: 3.6
 
 Obfuscate email addresses to deter email harvesting spammers, while retaining the appearance and functionality of hyperlinks.
 
@@ -235,6 +235,57 @@ add_filter( 'c2c_obfuscate_email_filters', 'change_c2c_obfuscate_email_filters' 
 
 == Changelog ==
 
+= 3.6 (2019-04-22) =
+Highlights:
+
+* This release is a minor update that verifies compatibility through WordPress 5.1+, drops compatibility with versions of WordPress older than 4.7, and makes minor behind-the-scenes improvements.
+
+Details:
+
+* Change: Initialize plugin on `plugins_loaded` action instead of on load
+* Change: Update plugin framework to 049
+    * 049:
+    * Correct last arg in call to `add_settings_field()` to be an array
+    * Wrap help text for settings in `label` instead of `p`
+    * Only use `label` for help text for checkboxes, otherwise use `p`
+    * Ensure a `textarea` displays as a block to prevent orphaning of subsequent help text
+    * Note compatibility through WP 5.1+
+    * Update copyright date (2019)
+    * 048:
+    * When resetting options, delete the option rather than setting it with default values
+    * Prevent double "Settings reset" admin notice upon settings reset
+    * 047:
+    * Don't save default setting values to database on install
+    * Change "Cheatin', huh?" error messages to "Something went wrong.", consistent with WP core
+    * Note compatibility through WP 4.9+
+    * Drop compatibility with version of WP older than 4.7
+    * 046:
+    * Fix `reset_options()` to reference instance variable `$options`.
+    * Note compatibility through WP 4.7+.
+    * Update copyright date (2017)
+    * 045:
+    * Ensure `reset_options()` resets values saved in the database.
+* New: Add README.md file
+* New: Add CHANGELOG.md file and move all but most recent changelog entries into it
+* New: Add inline documentation for hook
+* New: Add GitHub link to readme
+* Unit tests:
+    * New: Add unit test for defaults for settings
+    * Change: Improve tests for settings handling
+    * Change: Default `WP_TESTS_DIR` to `/tmp/wordpress-tests-lib` rather than erroring out if not defined via environment variable
+    * Change: Enable more error output for unit tests
+* Change: Store setting name in constant
+* Change: Downplay modern-day effectiveness of the techniques and improve overall explanations
+* Change: Improve documentation for hook within readme.txt
+* Change: Note compatibility through WP 5.1+
+* Change: Drop compatibility with version of WP older than 4.7
+* Change: Convert last remaing instances of "e-mail" to "email"
+* Change: Rename readme.txt section from 'Filters' to 'Hooks' and provide a better section intro
+* Change: Modify formatting of hook name in readme to prevent being uppercased when shown in the Plugin Directory
+* Change: Update installation instruction to prefer built-in installer over .zip file
+* Change: Update copyright date (2019)
+* Change: Update License URI to be HTTPS
+
 = 3.5.1 (2016-06-13) =
 * Change: Update plugin framework to 044:
     * 044
@@ -281,6 +332,9 @@ _Full changelog is available in [CHANGELOG.md](https://github.com/coffee2code/ob
 
 
 == Upgrade Notice ==
+
+= 3.6 =
+Minor update: tweaked plugin initialization, updates plugin framework to version 049, noted compatibility through WP 5.1+, dropped compatibility with versions of WP older than 4.7, created CHANGELOG.md to store historical changelog outside of readme.txt, and updated copyright date (2019)
 
 = 3.5.1 =
 Minor update: updated plugin framework to 044; fixed display of changelog; used "email" instead of "e-mail" everywhere

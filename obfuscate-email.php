@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Obfuscate Email
- * Version:     3.5.1
+ * Version:     3.6
  * Plugin URI:  http://coffee2code.com/wp-plugins/obfuscate-email/
  * Author:      Scott Reilly
  * Author URI:  http://coffee2code.com/
@@ -18,7 +18,7 @@
  *
  * @package Obfuscate_Email
  * @author  Scott Reilly
- * @version 3.5.1
+ * @version 3.6
  */
 
 /*
@@ -44,6 +44,10 @@
  *       my-email::before { content: attr(data-user); }
  *       </style>
  *       <my-email data-user="myemail" data-domain="mydomain.com">@</my-email>
+ * - Prevent obfuscation in various situations:
+ *   * Any HTML tag attribute, except for the href attribute of the a tag.
+ *   * Other HTML tags: <script>, <noscript>, <textarea>, <head>, <xmp>, HTML comments
+ * - Add means for indicating a given email address shouldn't be obfuscated, e.g. !user@example.com
  */
 
 /*
@@ -118,7 +122,7 @@ final class c2c_ObfuscateEmail extends c2c_ObfuscateEmail_Plugin_049 {
 	 * Constructor.
 	 */
 	protected function __construct() {
-		parent::__construct( '3.5.1', 'obfuscate-email', 'c2c', __FILE__, array() );
+		parent::__construct( '3.6', 'obfuscate-email', 'c2c', __FILE__, array() );
 		register_activation_hook( __FILE__, array( __CLASS__, 'activation' ) );
 
 		return self::$instance = $this;
