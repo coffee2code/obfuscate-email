@@ -67,6 +67,14 @@ require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'c2c-plugin.php' );
 final class c2c_ObfuscateEmail extends c2c_ObfuscateEmail_Plugin_049 {
 
 	/**
+	 * Name of plugin's setting.
+	 *
+	 * @since 3.6
+	 * @var string
+	 */
+	const SETTING_NAME = 'c2c_obfuscate_email';
+
+	/**
 	 * The one true instance.
 	 *
 	 * @var c2c_ObfuscateEmail
@@ -125,7 +133,7 @@ final class c2c_ObfuscateEmail extends c2c_ObfuscateEmail_Plugin_049 {
 	 * @since 3.0
 	 */
 	public static function uninstall() {
-		delete_option( 'c2c_obfuscate_email' );
+		delete_option( self::SETTING_NAME );
 	}
 
 	/**

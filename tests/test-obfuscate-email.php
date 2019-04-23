@@ -216,7 +216,7 @@ class Obfuscate_Email_Test extends WP_UnitTestCase {
 	}
 
 	public function test_uninstall_deletes_option() {
-		$option = 'c2c_obfuscate_email';
+		$option = c2c_ObfuscateEmail::SETTING_NAME;
 		c2c_ObfuscateEmail::instance()->get_options();
 
 		c2c_ObfuscateEmail::uninstall();
