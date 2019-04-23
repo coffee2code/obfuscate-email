@@ -135,8 +135,8 @@ final class c2c_ObfuscateEmail extends c2c_ObfuscateEmail_Plugin_044 {
 	 * @since 3.0
 	 */
 	public function load_config() {
-		$this->name      = __( 'Obfuscate E-mail', 'obfuscate-email' );
-		$this->menu_name = __( 'Obfuscate E-mail', 'obfuscate-email' );
+		$this->name      = __( 'Obfuscate Email', 'obfuscate-email' );
+		$this->menu_name = __( 'Obfuscate Email', 'obfuscate-email' );
 
 		$this->config = array(
 			'encode_everything' => array(

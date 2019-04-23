@@ -10,6 +10,7 @@
     * Change: Enable more error output for unit tests
 * Change: Note compatibility through WP 5.1+
 * Change: Drop compatibility with version of WP older than 4.7
+* Change: Convert last remaing instances of "e-mail" to "email"
 * Change: Rename readme.txt section from 'Filters' to 'Hooks' and provide a better section intro
 * Change: Modify formatting of hook name in readme to prevent being uppercased when shown in the Plugin Directory
 * Change: Update installation instruction to prefer built-in installer over .zip file

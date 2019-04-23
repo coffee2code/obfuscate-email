@@ -109,7 +109,7 @@ Links: [Plugin Homepage](http://coffee2code.com/wp-plugins/obfuscate-email/) | [
 1. Whether installing or updating, whether this plugin or any other, it is always advisable to back-up your data before starting
 1. Install via the built-in WordPress plugin installer. Or download and unzip `obfuscate-email.zip` inside the plugins directory for your site (typically `wp-content/plugins/`)
 1. Activate the plugin through the 'Plugins' admin menu in WordPress
-1. Go to `Settings` -> `Obfuscate E-mail` admin options page (which you can also get to via the Settings link next to the plugin on the Manage Plugins page) and optionally customize the settings.
+1. Go to `Settings` -> `Obfuscate Email` admin options page (which you can also get to via the Settings link next to the plugin on the Manage Plugins page) and optionally customize the settings.
 
 
 == Frequently Asked Questions ==
@@ -132,7 +132,7 @@ Yes, all techniques can be activated at once (and multiple ones are by default).
 
 = Does this plugin modify the post content in the database? =
 
-No. The plugin filters post content on-the-fly. E-mails will remain unchanged in the database.
+No. The plugin filters post content on-the-fly. Emails will remain unchanged in the database.
 
 = Why don't I see any obfuscation when viewing the source for the page (or a selection) via my browser's inspector? =
 
