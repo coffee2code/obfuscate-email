@@ -34,6 +34,7 @@
     * Change: Default `WP_TESTS_DIR` to `/tmp/wordpress-tests-lib` rather than erroring out if not defined via environment variable
     * Change: Enable more error output for unit tests
 * Change: Store setting name in constant
+* Change: Downplay modern-day effectiveness of the techniques and improve overall explanations
 * Change: Improve documentation for hook within readme.txt
 * Change: Note compatibility through WP 5.1+
 * Change: Drop compatibility with version of WP older than 4.7

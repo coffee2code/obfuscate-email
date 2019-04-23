@@ -16,7 +16,9 @@ Obfuscate email addresses to deter email harvesting spammers, while retaining th
 
 "Obfuscation" simply means that techniques are employed to modify email address strings that appear on your site in such a way that bots scraping your site are unable to identify those addresses; however, at the same time those emails addresses should still look and work correctly for visitors, as much as possible.
 
-The plugin allows for use of one or more (or all!) of three proven techniques for email protection. While techniques abound for email obfuscation, the three techniques included empirically provide you with the best balance of email address protection with minimal impact on visitors. You can decide on a technique by technique basis which ones you'd like to employ as some have potential drawbacks. The plugin's settings page allows you select which techniques to use.
+The plugin allows for use of one or more (or all!) of three techniques for email protection that have proven themselves in the past. While techniques abound for email obfuscation, the three techniques included provide the best balance of email address protection with minimal impact on visitors. You can decide on a technique by technique basis which ones you'd like to employ as some have potential drawbacks. The plugin's settings page allows you select which techniques to use.
+
+Ultimately, your best bet would be to not publicly expose an email address and to offer a contact form as an alternative means of contact. Or you can just accept that email addresses will get scraped and spammed, and rely on an email service that is good at filtering out spam. But this plugin is here for you if you want to employ the most reasonable means of making email harvesting difficult for your site.
 
 See Filters section for `c2c_obfuscate_email_filters` for complete list of filters that are processed.
 
@@ -25,31 +27,13 @@ Please read the Details section of this documentation to learn more about the te
 
 == Details ==
 
-The email obfuscation techniques included in this plugin were chosen for their effectiveness and general applicability with minimal impact on users. I urge you to read about an [experiment](http://techblog.tilllate.com/2008/07/20/ten-methods-to-obfuscate-e-mail-addresses-compared/) performed by Silvan Mühlemann in which he protected email addresses using nine different techniques. He ensured the page containing those email addresses got indexed by Google and then waited 1.5 years. During that time he measured the amount of spam received to each of the email addresses.
+The email obfuscation techniques included in this plugin were chosen for their effectiveness and general applicability with minimal impact on users. I urge you to read about an [experiment](https://web.archive.org/web/20180908103745/http://techblog.tilllate.com/2008/07/20/ten-methods-to-obfuscate-e-mail-addresses-compared/) performed by Silvan Mühlemann in which he protected email addresses using nine different techniques. He ensured the page containing those email addresses got indexed by Google and then waited 1.5 years. During that time he measured the amount of spam received to each of the email addresses. (Note: this experiment came out a few years after this plugin was originally created, but at this point was conducted over 10 years ago. Its conclusions may not apply as strongly today.)
 
 Three techniques stood out as having received *zero* spam emails during that time. Two of those three techniques are included in this plugin. The fourth of his techniques is also included even though it did get a very small amount of spam -- the technique was still very effective and more importantly does not rely on users to have CSS or JavaScript enabled.
 
 The techniques are as follows. Two are enabled by default. Weigh the requirements against what you're comfortable requiring of visitors in order for them to see and make use of email addresses you post on your site.
 
 (For all the examples below, assume you have the link `<a href="mailto:person@example.com">person@example.com</a>` in your post.)
-
-= Changing text direction with CSS (not enabled by default) =
-
-* *How does it work?* The email addresses are sent reversed in the markup. Using CSS, the text gets reversed so that visitors see the email addresses as intended. Email scrapers don't recognize the emails in their reversed form and don't typically utilize a CSS engine to help determine how text would look onscreen.
-
-* *Uses CSS?* Yes, which means if a visitor does not have CSS enabled, the emails will appear backwards to them.
-
-* *Uses JavasScript?* No.
-
-* *Can visitor copy-n-paste the link from onscreen text without needing to make modifications?* No, text copied in such a manner will be reversed. However, a right-click -> "copy link/email address" will work properly for linked email addresses.
-
-* *Does this protect emails appearing in mailto: links and within HTML tag attributes?* No.
-
-* *How effective is this?* In the aforementioned experiment, no spam emails were received when using just this technique.
-
-* *Example*:
-
-    `<a href="mailto:person@example.com"><span class="codedirection">moc.elpmaxe@nosrep</span></a>`
 
 = Using CSS display:none =
 
@@ -81,7 +65,7 @@ The techniques are as follows. Two are enabled by default. Weigh the requirement
 
 * *Does this protect emails appearing in mailto: links and within HTML tag attributes?* Yes, though if you specify custom replacement strings visitors clicking on a mailto link will have to modify the email address that shows up in their mail program.
 
-* *How effective is this?* In the aforementioned experiment, almost no spam emails were received when using just this technique. However, this technique does not require the support of any particular client-side techniques (CSS or JavaScript).
+* *How effective is this?* In the aforementioned experiment, almost no spam emails were received when using just this technique. As a bonus, this technique does not require the support of any particular client-side techniques (CSS or JavaScript).
 
 * *Examples*
     * Custom AT and DOT replacements
@@ -90,9 +74,27 @@ The techniques are as follows. Two are enabled by default. Weigh the requirement
     * Everything encoded (aka hexadecimal HTML entity substitution)
 `<a href="mailto:&#x70;&#x65;&#x72;&#x73;&#x6f;&#x6e;&#x40;&#x65;&#x78;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#x2e;&#x63;&#x6f;&#x6d;">&#x70;&#x65;&#x72;&#x73;&#x6f;&#x6e;&#x40;&#x65;&#x78;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#x2e;&#x63;&#x6f;&#x6d;</a>`
 
+= Changing text direction with CSS (not enabled by default) =
+
+* *How does it work?* The email addresses are sent reversed in the markup. Using CSS, the text gets reversed so that visitors see the email addresses as intended. Email scrapers don't recognize the emails in their reversed form and don't typically utilize a CSS engine to help determine how text would look onscreen.
+
+* *Uses CSS?* Yes, which means if a visitor does not have CSS enabled, the emails will appear backwards to them.
+
+* *Uses JavasScript?* No.
+
+* *Can visitor copy-n-paste the link from onscreen text without needing to make modifications?* No, text copied in such a manner will be reversed. However, a right-click -> "copy link/email address" will work properly for linked email addresses.
+
+* *Does this protect emails appearing in mailto: links and within HTML tag attributes?* No.
+
+* *How effective is this?* In the aforementioned experiment, no spam emails were received when using just this technique.
+
+* *Example*:
+
+    `<a href="mailto:person@example.com"><span class="codedirection">moc.elpmaxe@nosrep</span></a>`
+
 = How it looks =
 
-If all techniques are enabled at once, the resulting obfuscation of the example link above is (for the full effect, view this in the page's source):
+If all techniques are enabled at once, the resulting obfuscation of the example link above is (for the full effect, view this in the page's source or the [readme.txt]() file directly):
 
 `<a href="mailto:&#x70;&#x65;&#x72;&#x73;&#x6f;&#x6e;&#x40;&#x65;&#x78;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#x2e;&#x63;&#x6f;&#x6d;"><span class="codedirection">&#x6d;&#x6f;&#x63;&#x2e;&#x65;&#x6c;&#x70;&#x6d;&#x61;&#x78;&#x65;<span class="displaynone">null</span>&#x40;&#x6e;&#x6f;&#x73;&#x72;&#x65;&#x70;</span></a>`
 
@@ -116,19 +118,25 @@ Links: [Plugin Homepage](http://coffee2code.com/wp-plugins/obfuscate-email/) | [
 
 = So it'll be impossible for spammers to harvest my site for email addresses? =
 
-Of course nothing is guaranteed. By its very definition, "obfuscate" means "to make obscure or unclear", and that's all it's really doing. It's some degree of basic protection, which is better than nothing. Much as how locks in real-life at best provide some measure of deterrent for a would-be criminal rather than absolute security from a determined and capable individual. That said, some testing (as described elsewhere in this documentation) indicates using one or more of the supplied techniques are extremely effective.
+Of course nothing is guaranteed. By its very definition, "obfuscate" means "to make obscure or unclear", and that's all it's really doing. It's some degree of basic protection, which is oftentimes better than nothing. Similarly, a locked door is only some measure of deterrent for a would-be intruder and not absolute security.
+
+Your best bet would be to not publicly expose an email address. You could provide a contact form as an alternative means of contact. Or you can just accept that email addresses will get scraped and spammed, and rely on an email service that is good at filtering out spam. But this plugin is here for you if you want to employ the most reasonable means of making email harvesting difficult for your site.
 
 = Aren't there better methods of email obfuscation? =
 
-Nothing short of not actually displaying email addresses can guarantee that email addresses can't get harvested. Some methods are more aggressive and therefore have compatibility and/or usability issues. This plugin can be very compatible and usable by all visitors to your site, but also has allowances for greater protection with minimal impact (though how minimal is for you to judge).
+Nothing short of not actually displaying email addresses can guarantee that email addresses can't get harvested. Some methods are more aggressive and therefore have compatibility and/or usability issues. This plugin can be very compatible and usable by most visitors to your site, but also has allowances for greater protection with minimal impact (though how minimal is for you to judge).
 
 = Does this plugin make use of JavaScript as other email obfuscators do?
 
-No. This makes this plugin's implementation of obfuscation more compatible and usable by more visitors. This may leave out techniques that some could argue are aggressively protective, but I feel (based on the aforementioned study and personal experience) that the included techniques are just as effective.
+No. This makes this plugin's implementation of obfuscation more compatible and usable by more visitors. This choice does leave out JavaScript-based approaches that some argue are effective in their own way (techniques such as ROT13 transformation, JS insertion/contruction of the email address, among others).
 
-= This plugin provides multiple techniques for email obfuscation; can I apply more than one at once for even greater protection? =
+= Can I apply more than one of the available techniques at the same time for even greater protection? =
 
 Yes, all techniques can be activated at once (and multiple ones are by default).
+
+= Will obfuscated links meet WCAG/508 or other accessibility standards? =
+
+No. Any technique used to obfuscate email address has some measure of drawbacks in terms of accessibility and/or usability. The documentation for the techniques provided by the plugin are clear about the nature of their individual drawbacks.
 
 = Does this plugin modify the post content in the database? =
 
