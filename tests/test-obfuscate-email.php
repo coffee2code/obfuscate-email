@@ -6,7 +6,6 @@ class Obfuscate_Email_Test extends WP_UnitTestCase {
 
 	public function setUp() {
 		parent::setUp();
-		$this->set_option();
 	}
 
 
@@ -215,18 +214,40 @@ class Obfuscate_Email_Test extends WP_UnitTestCase {
 		);
 	}
 
+	/*
+	 * Setting handling
+	 */
+
+	public function test_does_not_immediately_store_default_settings_in_db() {
+		$option_name = c2c_ObfuscateEmail::SETTING_NAME;
+		// Get the options just to see if they may get saved.
+		$options     = c2c_ObfuscateEmail::instance()->get_options();
+
+		$this->assertFalse( get_option( $option_name ) );
+	}
+
 	public function test_uninstall_deletes_option() {
-		$option = c2c_ObfuscateEmail::SETTING_NAME;
-		c2c_ObfuscateEmail::instance()->get_options();
+		$option_name = c2c_ObfuscateEmail::SETTING_NAME;
+		$options     = c2c_ObfuscateEmail::instance()->get_options();
+
+		// Explicitly set an option to ensure options get saved to the database.
+		$this->set_option( array( 'at_replace' => '(AT)' ) );
+
+		$this->assertNotEmpty( $options );
+		$this->assertNotFalse( get_option( $option_name ) );
 
 		c2c_ObfuscateEmail::uninstall();
 
-		$this->assertFalse( get_option( $option ) );
+		$this->assertFalse( get_option( $option_name ) );
 	}
+
+
 
 	/***
 	 * ALL ADMIN AREA RELATED TESTS NEED TO FOLLOW THIS FUNCTION
 	 ***/
+
+
 
 	public function test_turn_on_admin() {
 		if ( ! defined( 'WP_ADMIN' ) ) {

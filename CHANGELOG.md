@@ -29,6 +29,7 @@
 * New: Add inline documentation for hook
 * New: Add GitHub link to readme
 * Unit tests:
+    * Change: Improve tests for settings handling
     * Change: Default `WP_TESTS_DIR` to `/tmp/wordpress-tests-lib` rather than erroring out if not defined via environment variable
     * Change: Enable more error output for unit tests
 * Change: Store setting name in constant
