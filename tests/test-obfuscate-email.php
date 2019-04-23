@@ -16,6 +16,16 @@ class Obfuscate_Email_Test extends WP_UnitTestCase {
 	//
 
 
+	public static function get_settings_and_defaults() {
+		return array(
+			array( 'encode_everything', true ),
+			array( 'at_replace', '' ),
+			array( 'dot_replace', '' ),
+			array( 'use_text_direction', false ),
+			array( 'use_display_none', true ),
+		);
+	}
+
 	public static function get_default_filters() {
 		return array(
 			array( 'link_description' ),
@@ -101,6 +111,23 @@ class Obfuscate_Email_Test extends WP_UnitTestCase {
 		$expected = '&#x74;&#x65;&#x73;&#x74;&#x40;<span class="oe_displaynone">null</span>&#x65;&#x78;&#x61;&#x6d;&#x70;&#x6c;&#x65;&#x2e;&#x63;&#x6f;&#x6d;';
 
 		$this->assertEquals( $expected, c2c_obfuscate_email( $email ) );
+	}
+
+	/**
+	 * @dataProvider get_settings_and_defaults
+	 */
+	public function test_default_settings( $setting, $value ) {
+		$options = c2c_ObfuscateEmail::instance()->get_options();
+
+		if ( is_bool( $value ) ) {
+			if ( $value ) {
+				$this->assertTrue( $options[ $setting ] );
+			} else {
+				$this->assertFalse( $options[ $setting ] );
+			}
+		} else {
+			$this->assertEmpty( $options[ $setting ] );
+		}
 	}
 
 	public function test_at_and_dot_default_replace() {
