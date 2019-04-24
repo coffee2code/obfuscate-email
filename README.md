@@ -1,6 +1,6 @@
 # Obfuscate Email
 
-A plugin for WordPress that automatically turns plaintext URLs and email addresses into links.
+A plugin for WordPress that obfuscates email addresses to deter email-harvesting spammers.
 
 This plugin is available in the WordPress Plugin Directory: https://wordpress.org/plugins/obfuscate-email/
 

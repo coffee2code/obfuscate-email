@@ -8,11 +8,11 @@ Requires at least: 4.7
 Tested up to: 5.1
 Stable tag: 3.6
 
-Obfuscate email addresses to deter email harvesting spammers, while retaining the appearance and functionality of hyperlinks.
+Obfuscate email addresses to deter email-harvesting spammers.
 
 == Description ==
 
-Obfuscate email addresses to deter email harvesting spammers, while retaining the appearance and functionality of hyperlinks.
+Obfuscate email addresses to deter email-harvesting spammers, with a focus on retaining the appearance and functionality of email hyperlinks.
 
 "Obfuscation" simply means that techniques are employed to modify email address strings that appear on your site in such a way that bots scraping your site are unable to identify those addresses; however, at the same time those emails addresses should still look and work correctly for visitors, as much as possible.
 
