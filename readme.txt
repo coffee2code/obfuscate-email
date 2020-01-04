@@ -6,7 +6,7 @@ License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 4.7
 Tested up to: 5.3
-Stable tag: 3.6
+Stable tag: 3.6.1
 
 Obfuscate email addresses to deter email-harvesting spammers.
 
@@ -235,6 +235,11 @@ add_filter( 'c2c_obfuscate_email_filters', 'change_c2c_obfuscate_email_filters' 
 
 == Changelog ==
 
+= 3.6.1 (2020-01-03) =
+* Change: Unit tests: Update unit test install script and bootstrap to use latest WP unit test repo
+* Change: Note compatibility through WP 5.3+
+* Change: Update copyright date (2020)
+
 = 3.6 (2019-04-22) =
 Highlights:
 
@@ -303,38 +308,16 @@ Details:
 * Change: Use "email" instead of "e-mail" in plugin's name, description, and documentation.
 * Bugfix: Add appropriate spacing so v3.5's changelog entry gets properly parsed. Props szepeviktor.
 
-= 3.5 (2016-04-04) =
-Highlights:
-
-* This release adds support for language packs and has some minor behind-the-scenes changes.
-
-Details:
-
-* Change: Update plugin framework to 041:
-    * Change class name to c2c_ObfuscateEmail_Plugin_041 to be plugin-specific.
-    * Set textdomain using a string instead of a variable.
-    * Don't load textdomain from file.
-    * Change admin page header from 'h2' to 'h1' tag.
-    * Add `c2c_plugin_version()`.
-    * Formatting improvements to inline docs.
-* Change: Add support for language packs:
-    * Set textdomain using a string instead of a variable.
-    * Remove .pot file and /lang subdirectory.
-    * Remove 'Domain Path' from plugin header.
-* New: Add LICENSE file.
-* New: Add empty index.php to prevent files from being listed if web server has enabled directory listings.
-* Change: Minor code reformatting.
-* Change: Note compatibility through WP 4.5+.
-* Change: Dropped compatibility with version of WP older than 4.1.
-* Change: Update copyright date (2016).
-
 _Full changelog is available in [CHANGELOG.md](https://github.com/coffee2code/obfuscate-email/blob/master/CHANGELOG.md)._
 
 
 == Upgrade Notice ==
 
+= 3.6.1 =
+Trivial update: modernized unit tests, noted compatibility through WP 5.3+, and updated copyright date (2020)
+
 = 3.6 =
-Minor update: tweaked plugin initialization, updates plugin framework to version 049, noted compatibility through WP 5.1+, dropped compatibility with versions of WP older than 4.7, created CHANGELOG.md to store historical changelog outside of readme.txt, and updated copyright date (2019)
+Minor update: tweaked plugin initialization, updated plugin framework to version 049, noted compatibility through WP 5.1+, dropped compatibility with versions of WP older than 4.7, created CHANGELOG.md to store historical changelog outside of readme.txt, and updated copyright date (2019)
 
 = 3.5.1 =
 Minor update: updated plugin framework to 044; fixed display of changelog; used "email" instead of "e-mail" everywhere
