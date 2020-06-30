@@ -44,6 +44,18 @@ class Obfuscate_Email_Test extends WP_UnitTestCase {
 		);
 	}
 
+	public static function get_default_hooks() {
+		$hooks = array(
+			array( 'action', 'wp_head', 'add_css' ),
+		);
+
+		foreach ( self::get_default_filters() as $filter ) {
+			$hooks[] = array( 'filter', $filter[0], 'obfuscate_email', 15 );
+		}
+
+		return $hooks;
+	}
+
 
 	//
 	//
@@ -97,10 +109,19 @@ class Obfuscate_Email_Test extends WP_UnitTestCase {
 	}
 
 	/**
-	 * @dataProvider get_default_filters
+	 * @dataProvider get_default_hooks
 	 */
-	public function test_hooks_default_filters( $filter ) {
-		$this->assertNotFalse( has_filter( $filter, array( c2c_ObfuscateEmail::instance(), 'obfuscate_email' ), 15 ) );
+	public function test_default_hooks( $hook_type, $hook, $function, $priority = 10, $class_method = true ) {
+		$callback = $class_method ? array( c2c_ObfuscateEmail::instance(), $function ) : $function;
+
+		$prio = $hook_type === 'action' ?
+			has_action( $hook, $callback ) :
+			has_filter( $hook, $callback );
+
+		$this->assertNotFalse( $prio );
+		if ( $priority ) {
+			$this->assertEquals( $priority, $prio );
+		}
 	}
 
 	public function test_setting_name() {
