@@ -273,6 +273,19 @@ class Obfuscate_Email_Test extends WP_UnitTestCase {
 	}
 
 	/*
+	 * add_css()
+	 */
+
+	public function test_add_css() {
+		$expected = "\t\t<style type=\"text/css\">
+		span.oe_textdirection { unicode-bidi: bidi-override; direction: rtl; }
+		span.oe_displaynone { display: none; }
+		</style>\n";
+
+		$this->expectOutputRegex( '~^' . preg_quote( $expected ) . '$~', $this->obj->add_css() );
+	}
+
+	/*
 	 * Setting handling
 	 */
 

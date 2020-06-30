@@ -12,6 +12,7 @@
 * Change: Drop compatibility for version of WP older than 4.9
 * Change: Update links to coffee2code.com to be HTTPS
 * Unit tests:
+    * New: Add test for `add_css()`
     * New: Add test for setting name
     * Change: Store plugin instance in test object to simplify referencing it
     * Change: Update test for default hooks
