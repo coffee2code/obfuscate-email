@@ -13,6 +13,7 @@
 * Change: Update links to coffee2code.com to be HTTPS
 * Unit tests:
     * New: Add test for setting name
+    * Change: Store plugin instance in test object to simplify referencing it
     * Change: Update test for default hooks
     * Change: Use HTTPS for link to WP SVN repository in bin script for configuring unit tests (and delete commented-out code)
 

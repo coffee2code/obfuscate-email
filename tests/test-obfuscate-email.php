@@ -4,8 +4,14 @@ defined( 'ABSPATH' ) or die();
 
 class Obfuscate_Email_Test extends WP_UnitTestCase {
 
+	protected $obj;
+
 	public function setUp() {
 		parent::setUp();
+
+		$this->obj = c2c_ObfuscateEmail::instance();
+
+		$this->obj->reset_options();
 	}
 
 
@@ -73,7 +79,7 @@ class Obfuscate_Email_Test extends WP_UnitTestCase {
 			'use_display_none'   => true,
 		);
 		$settings = wp_parse_args( $settings, $defaults );
-		c2c_ObfuscateEmail::instance()->update_option( $settings, true );
+		$this->obj->update_option( $settings, true );
 	}
 
 
@@ -89,7 +95,7 @@ class Obfuscate_Email_Test extends WP_UnitTestCase {
 	}
 
 	public function test_get_version() {
-		$this->assertEquals( '3.6.1', c2c_ObfuscateEmail::instance()->version() );
+		$this->assertEquals( '3.6.1', $this->obj->version() );
 	}
 
 	public function test_plugin_framework_class_name() {
@@ -97,11 +103,11 @@ class Obfuscate_Email_Test extends WP_UnitTestCase {
 	}
 
 	public function test_plugin_framework_version() {
-		$this->assertEquals( '050', c2c_ObfuscateEmail::instance()->c2c_plugin_version() );
+		$this->assertEquals( '050', $this->obj->c2c_plugin_version() );
 	}
 
 	public function test_instance_object_is_returned() {
-		$this->assertTrue( is_a( c2c_ObfuscateEmail::instance(), 'c2c_ObfuscateEmail' ) );
+		$this->assertTrue( is_a( $this->obj, 'c2c_ObfuscateEmail' ) );
 	}
 
 	public function test_hooks_plugins_loaded() {
@@ -112,7 +118,7 @@ class Obfuscate_Email_Test extends WP_UnitTestCase {
 	 * @dataProvider get_default_hooks
 	 */
 	public function test_default_hooks( $hook_type, $hook, $function, $priority = 10, $class_method = true ) {
-		$callback = $class_method ? array( c2c_ObfuscateEmail::instance(), $function ) : $function;
+		$callback = $class_method ? array( $this->obj, $function ) : $function;
 
 		$prio = $hook_type === 'action' ?
 			has_action( $hook, $callback ) :
@@ -142,7 +148,7 @@ class Obfuscate_Email_Test extends WP_UnitTestCase {
 	 * @dataProvider get_settings_and_defaults
 	 */
 	public function test_default_settings( $setting, $value ) {
-		$options = c2c_ObfuscateEmail::instance()->get_options();
+		$options = $this->obj->get_options();
 
 		if ( is_bool( $value ) ) {
 			if ( $value ) {
@@ -273,14 +279,14 @@ class Obfuscate_Email_Test extends WP_UnitTestCase {
 	public function test_does_not_immediately_store_default_settings_in_db() {
 		$option_name = c2c_ObfuscateEmail::SETTING_NAME;
 		// Get the options just to see if they may get saved.
-		$options     = c2c_ObfuscateEmail::instance()->get_options();
+		$options     = $this->obj->get_options();
 
 		$this->assertFalse( get_option( $option_name ) );
 	}
 
 	public function test_uninstall_deletes_option() {
 		$option_name = c2c_ObfuscateEmail::SETTING_NAME;
-		$options     = c2c_ObfuscateEmail::instance()->get_options();
+		$options     = $this->obj->get_options();
 
 		// Explicitly set an option to ensure options get saved to the database.
 		$this->set_option( array( 'at_replace' => '(AT)' ) );
@@ -310,11 +316,11 @@ class Obfuscate_Email_Test extends WP_UnitTestCase {
 		// Necessary due to the singleton nature of the object and where the
 		// is_admin() occurs.
 		foreach ( $this->get_default_filters() as $filter ) {
-			remove_filter( $filter[0], array( c2c_ObfuscateEmail::instance(), 'obfuscate_email' ), 15 );
+			remove_filter( $filter[0], array( $this->obj, 'obfuscate_email' ), 15 );
 		}
-		remove_action( 'wp_head', array( c2c_ObfuscateEmail::instance(), 'add_css' ) );
+		remove_action( 'wp_head', array( $this->obj, 'add_css' ) );
 
-		c2c_ObfuscateEmail::instance()->register_filters();
+		$this->obj->register_filters();
 
 		$this->assertTrue( is_admin() );
 	}
@@ -325,7 +331,7 @@ class Obfuscate_Email_Test extends WP_UnitTestCase {
 	public function test_does_not_hook_default_filters_in_admin( $filter ) {
 		$this->test_turn_on_admin();
 
-		$this->assertFalse( has_filter( $filter, array( c2c_ObfuscateEmail::instance(), 'obfuscate_email' ) ) );
+		$this->assertFalse( has_filter( $filter, array( $this->obj, 'obfuscate_email' ) ) );
 	}
 
 	public function test_nothing_obfuscated_in_admin_even_with_everything_enabled() {
