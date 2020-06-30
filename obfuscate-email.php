@@ -200,11 +200,13 @@ final class c2c_ObfuscateEmail extends c2c_ObfuscateEmail_Plugin_050 {
 	 * Output CSS.
 	 */
 	public function add_css() {
-		echo <<<HTML
-		<style type="text/css">
-		span.{$this->css_text_direction} { unicode-bidi: bidi-override; direction: rtl; }
-		span.{$this->css_display_none} { display: none; }
-		</style>
+		$type_attr = current_theme_supports( 'html5' ) ? '' : ' type="text/css"';
+
+echo <<<HTML
+<style{$type_attr}>
+	span.{$this->css_text_direction} { unicode-bidi: bidi-override; direction: rtl; }
+	span.{$this->css_display_none} { display: none; }
+</style>
 
 HTML;
 	}

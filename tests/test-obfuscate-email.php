@@ -276,13 +276,23 @@ class Obfuscate_Email_Test extends WP_UnitTestCase {
 	 * add_css()
 	 */
 
-	public function test_add_css() {
-		$expected = "\t\t<style type=\"text/css\">
-		span.oe_textdirection { unicode-bidi: bidi-override; direction: rtl; }
-		span.oe_displaynone { display: none; }
-		</style>\n";
+	public function test_add_css( $attr = '', $support_html5 = true ) {
+		if ( $support_html5 ) {
+			add_theme_support( 'html5' );
+		}
+
+		$expected = "<style{$attr}>
+	span.oe_textdirection { unicode-bidi: bidi-override; direction: rtl; }
+	span.oe_displaynone { display: none; }
+</style>\n";
 
 		$this->expectOutputRegex( '~^' . preg_quote( $expected ) . '$~', $this->obj->add_css() );
+	}
+
+	public function test_add_css_with_no_html5_support() {
+		remove_theme_support( 'html5' );
+
+		$this->test_add_css( ' type="text/css"', false );
 	}
 
 	/*

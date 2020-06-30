@@ -1,6 +1,7 @@
 # Changelog
 
 ## _(in-progress)_
+* New: Add HTML5 compliance by omitting `type` attribute for `style` tag when the theme supports 'html5'
 * Change: Update plugin framework to 050
     * Allow a hash entry to literally have '0' as a value without being entirely omitted when saved
     * Output donation markup using `printf()` rather than using string concatenation
@@ -12,7 +13,7 @@
 * Change: Drop compatibility for version of WP older than 4.9
 * Change: Update links to coffee2code.com to be HTTPS
 * Unit tests:
-    * New: Add test for `add_css()`
+    * New: Add tests for `add_css()`
     * New: Add test for setting name
     * Change: Store plugin instance in test object to simplify referencing it
     * Change: Update test for default hooks
