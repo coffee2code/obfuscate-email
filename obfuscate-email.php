@@ -22,35 +22,6 @@
  */
 
 /*
- * TODO:
- *
- * - Hook or constant to prevent inline CSS from being output. If so, add FAQ about it and show example default CSS rules.
- *   If not, add an FAQ showing the code snippet to disable output of default inline CSS.
- * - Filter to override class names used 'oe_textdirection', 'oe_displaynone'
- * - Consider obscuring "mailto:" as well?
- * - Have regexp account for possible spaces around email in attrib. i.e. href="mailto: joe@example.com "
- * - Add help tabs explaining the different obfuscation methods
- * - Add support for JS ROT13 method?
- *   = ROT13 encryption =
- *   *How does it work?* The email addresses are displayed using ROT13 encryption (replacing each letter with the 13th letter that follows it). JavaScript is used to decode the strings so that visitors see the email properly. Email scrapers don't typically utilize a JavaScript engine to help determine how text would look onscreen.
- *   *Uses CSS?* No.
- *   *Uses JavasScript?* Yes, which means if a visitor does not have JavaScript enabled, the emails will appear garbled.
- *   *Can visitor copy-n-paste the link from onscreen text without needing to make modifications?* Yes (unless they have JavaScript disabled).
- *   *Does this protect emails appearing in mailto: links and within HTML tag attributes?* Yes.
- *   *How effective is this?* In the aforementioned experiment, no spam emails were received when using just this technique.
- * - Add support for CSS before/after technique:
- *       <style>
- *       my-email::after { content: attr(data-domain); }
- *       my-email::before { content: attr(data-user); }
- *       </style>
- *       <my-email data-user="myemail" data-domain="mydomain.com">@</my-email>
- * - Prevent obfuscation in various situations:
- *   * Any HTML tag attribute, except for the href attribute of the a tag.
- *   * Other HTML tags: <script>, <noscript>, <textarea>, <head>, <xmp>, HTML comments
- * - Add means for indicating a given email address shouldn't be obfuscated, e.g. !user@example.com
- */
-
-/*
 	Copyright (c) 2005-2020 by Scott Reilly (aka coffee2code)
 
 	This program is free software; you can redistribute it and/or
