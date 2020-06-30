@@ -103,6 +103,10 @@ class Obfuscate_Email_Test extends WP_UnitTestCase {
 		$this->assertNotFalse( has_filter( $filter, array( c2c_ObfuscateEmail::instance(), 'obfuscate_email' ), 15 ) );
 	}
 
+	public function test_setting_name() {
+		$this->assertEquals( 'c2c_obfuscate_email', c2c_ObfuscateEmail::SETTING_NAME );
+	}
+
 	/**
 	 * @dataProvider get_default_filters
 	 */
