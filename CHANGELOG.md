@@ -1,6 +1,13 @@
 # Changelog
 
-## _(in-progress)_
+## 3.7 _(2020-06-30)_
+
+### Highlights:
+
+This minor release updates its plugin framework, adds a TODO.md file, updates a few URLs to be HTTPS, expands unit testing, updates compatibility to be WP 4.9 through 5.4+, and minor behind-the-scenes tweaks.
+
+### Details:
+
 * New: Add HTML5 compliance by omitting `type` attribute for `style` tag when the theme supports 'html5'
 * Change: Update plugin framework to 050
     * Allow a hash entry to literally have '0' as a value without being entirely omitted when saved

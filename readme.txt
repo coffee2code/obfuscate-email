@@ -6,7 +6,7 @@ License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 4.9
 Tested up to: 5.4
-Stable tag: 3.6.1
+Stable tag: 3.7
 
 Obfuscate email addresses to deter email-harvesting spammers.
 
@@ -235,6 +235,32 @@ add_filter( 'c2c_obfuscate_email_filters', 'change_c2c_obfuscate_email_filters' 
 
 == Changelog ==
 
+= 3.7 (2020-06-30) =
+
+Highlights:
+
+* This minor release updates its plugin framework, omits `type` attribute for `style` tag when theme supports 'html5', adds a TODO.md file, updates a few URLs to be HTTPS, expands unit testing, and updates compatibility to be WP 4.9 through 5.4+.
+
+Details:
+
+* New: Add HTML5 compliance by omitting `type` attribute for `style` tag when the theme supports 'html5'
+* Change: Update plugin framework to 050
+    * Allow a hash entry to literally have '0' as a value without being entirely omitted when saved
+    * Output donation markup using `printf()` rather than using string concatenation
+    * Update copyright date (2020)
+    * Note compatibility through WP 5.4+
+    * Drop compatibility with version of WP older than 4.9
+* New: Add TODO.md and move existing TODO list from top of main plugin file into it (and add items to it)
+* Change: Note compatibility through WP 5.4+
+* Change: Drop compatibility for version of WP older than 4.9
+* Change: Update links to coffee2code.com to be HTTPS
+* Unit tests:
+    * New: Add tests for `add_css()`
+    * New: Add test for setting name
+    * Change: Store plugin instance in test object to simplify referencing it
+    * Change: Update test for default hooks
+    * Change: Use HTTPS for link to WP SVN repository in bin script for configuring unit tests (and delete commented-out code)
+
 = 3.6.1 (2020-01-03) =
 * Change: Unit tests: Update unit test install script and bootstrap to use latest WP unit test repo
 * Change: Note compatibility through WP 5.3+
@@ -291,27 +317,13 @@ Details:
 * Change: Update copyright date (2019)
 * Change: Update License URI to be HTTPS
 
-= 3.5.1 (2016-06-13) =
-* Change: Update plugin framework to 044:
-    * 044
-    * Add `reset_caches()` to clear caches and memoized data. Use it in `reset_options()` and `verify_config()`.
-    * Add `verify_options()` with logic extracted from `verify_config()` for initializing default option attributes.
-    * Add  `add_option()` to add a new option to the plugin's configuration.
-    * Add filter 'sanitized_option_names' to allow modifying the list of whitelisted option names.
-    * Change: Refactor `get_option_names()`.
-    * 043
-    * Disregard invalid lines supplied as part of hash option value.
-    * 042
-    * Update `disable_update_check()` to check for HTTP and HTTPS for plugin update check API URL.
-    * Translate "Donate" in footer message.
-    * Note compatibility through WP 4.5.
-* Change: Use "email" instead of "e-mail" in plugin's name, description, and documentation.
-* Bugfix: Add appropriate spacing so v3.5's changelog entry gets properly parsed. Props szepeviktor.
-
 _Full changelog is available in [CHANGELOG.md](https://github.com/coffee2code/obfuscate-email/blob/master/CHANGELOG.md)._
 
 
 == Upgrade Notice ==
+
+= 3.7 =
+Minor update: updated plugin framework, added a TODO.md file, updated a few URLs to be HTTPS, expanded unit testing, updated compatibility to be WP 4.9 through 5.4+, and minor behind-the-scenes tweaks.
 
 = 3.6.1 =
 Trivial update: modernized unit tests, noted compatibility through WP 5.3+, and updated copyright date (2020)
