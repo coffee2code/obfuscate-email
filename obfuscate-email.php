@@ -45,7 +45,7 @@ if ( ! class_exists( 'c2c_ObfuscateEmail' ) ) :
 
 require_once( dirname( __FILE__ ) . DIRECTORY_SEPARATOR . 'c2c-plugin.php' );
 
-final class c2c_ObfuscateEmail extends c2c_ObfuscateEmail_Plugin_050 {
+final class c2c_ObfuscateEmail extends c2c_Plugin_060 {
 
 	/**
 	 * Name of plugin's setting.
