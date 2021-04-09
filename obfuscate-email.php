@@ -197,6 +197,76 @@ final class c2c_ObfuscateEmail extends c2c_ObfuscateEmail_Plugin_050 {
 	}
 
 	/**
+	 * Returns translated strings used by c2c_Plugin parent class.
+	 *
+	 * @since 3.8
+	 *
+	 * @param string $string Optional. The string whose translation should be
+	 *                       returned, or an empty string to return all strings.
+	 *                       Default ''.
+	 * @return string|string[] The translated string, or if a string was provided
+	 *                         but a translation was not found then the original
+	 *                         string, or an array of all strings if $string is ''.
+	 */
+	public function get_c2c_string( $string = '' ) {
+		$strings = array(
+			'A value is required for: "%s"'
+				/* translators: %s: Label for setting. */
+				=> __( 'A value is required for: "%s"', 'obfuscate-email' ),
+			'Click for more help on this plugin'
+				=> __( 'Click for more help on this plugin', 'obfuscate-email' ),
+			' (especially check out the "Other Notes" tab, if present)'
+				=> __( ' (especially check out the "Other Notes" tab, if present)', 'obfuscate-email' ),
+			'Coffee fuels my coding.'
+				=> __( 'Coffee fuels my coding.', 'obfuscate-email' ),
+			'Did you find this plugin useful?'
+				=> __( 'Did you find this plugin useful?', 'obfuscate-email' ),
+			'Donate'
+				=> __( 'Donate', 'obfuscate-email' ),
+			'Expected integer value for: %s'
+				=> __( 'Expected integer value for: %s', 'obfuscate-email' ),
+			'Invalid file specified for C2C_Plugin: %s'
+				/* translators: %s: Path to the plugin file. */
+				=> __( 'Invalid file specified for C2C_Plugin: %s', 'obfuscate-email' ),
+			'More information about %1$s %2$s'
+				/* translators: 1: plugin name 2: plugin version */
+				=> __( 'More information about %1$s %2$s', 'obfuscate-email' ),
+			'More Help'
+				=> __( 'More Help', 'obfuscate-email' ),
+			'More Plugin Help'
+				=> __( 'More Plugin Help', 'obfuscate-email' ),
+			'Please consider a donation'
+				=> __( 'Please consider a donation', 'obfuscate-email' ),
+			'Reset Settings'
+				=> __( 'Reset Settings', 'obfuscate-email' ),
+			'Save Changes'
+				=> __( 'Save Changes', 'obfuscate-email' ),
+			'See the "Help" link to the top-right of the page for more help.'
+				=> __( 'See the "Help" link to the top-right of the page for more help.', 'obfuscate-email' ),
+			'Settings'
+				=> __( 'Settings', 'obfuscate-email' ),
+			'Settings reset.'
+				=> __( 'Settings reset.', 'obfuscate-email' ),
+			'Something went wrong.'
+				=> __( 'Something went wrong.', 'obfuscate-email' ),
+			'The plugin author homepage.'
+				=> __( 'The plugin author homepage.', 'obfuscate-email' ),
+			"The plugin configuration option '%s' must be supplied."
+				/* translators: %s: The setting configuration key name. */
+				=>__( "The plugin configuration option '%s' must be supplied.", 'obfuscate-email' ),
+			'This plugin brought to you by %s.'
+				/* translators: %s: Link to plugin author's homepage. */
+				=> __( 'This plugin brought to you by %s.', 'obfuscate-email' ),
+		);
+
+		if ( ! $string ) {
+			return array_values( $strings );
+		}
+
+		return ! empty( $strings[ $string ] ) ? $strings[ $string ] : $string;
+	}
+
+	/**
 	 * Output CSS.
 	 */
 	public function add_css() {

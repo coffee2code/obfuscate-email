@@ -1,7 +1,7 @@
 # Changelog
 
 ## _(in-progress)_
-* Change: Note compatibility through WP 5.5+
+* Change: Move translation of all parent class strings into main plugin file
 * Change: Restructure unit test file structure
     * New: Create new subdirectory `phpunit/` to house all files related to unit testing
     * Change: Move `bin/` to `phpunit/bin/`
