@@ -8,6 +8,7 @@
     * Change: Move `tests/bootstrap.php` to `phpunit/`
     * Change: Move `tests/` to `phpunit/tests/`
     * Change: Rename `phpunit.xml` to `phpunit.xml.dist` per best practices
+* Change: Note compatibility through WP 5.7+
 * Change: Update copyright date (2021)
 
 ## 3.7 _(2020-06-30)_
