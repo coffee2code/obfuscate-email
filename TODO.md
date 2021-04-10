@@ -35,5 +35,7 @@ The following list comprises ideas, suggestions, and known issues, all of which 
 * Add technique that is just straight-up JS replacement. Filter text to extract email address and add JS to insert it where it should go.
   `<script>let a = 'user'; let b = 'domain'; document.write( '<a href=\"mailto:' + a + '@' + b + '\">'); document.write(a + '@' + b + '</a>');</script>`
 * Add technique that injects screenreader-friendly plaintext output, then JS cleans it up for users with JS, e.g. "user(replace parenthesized text with @)example.com"
+* Remove long-deprecated `c2c_email_obfuscator()`
+* Remove long-deprecated args to `c2c_obfuscate_email()`
 
 Feel free to make your own suggestions or champion for something already on the list (via the [plugin's support forum on WordPress.org](https://wordpress.org/support/plugin/obfuscate-email/) or on [GitHub](https://github.com/coffee2code/obfuscate-email/) as an issue or PR).
