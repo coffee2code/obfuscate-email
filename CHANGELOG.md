@@ -1,6 +1,13 @@
 # Changelog
 
-## _(in-progress)_
+## 3.8 _(2021-04-10)_
+
+### Highlights:
+
+This minor release updates updates the plugin framework, restructures the unit test file structure, and notes compatibility through WP 5.7+.
+
+### Details:
+
 * Change: Update plugin framework to 060
     * 060:
     * Rename class from `c2c_{PluginName}_Plugin_051` to `c2c_Plugin_060`

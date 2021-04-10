@@ -6,7 +6,7 @@ License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 4.9
 Tested up to: 5.7
-Stable tag: 3.7
+Stable tag: 3.8
 
 Obfuscate email addresses to deter email-harvesting spammers.
 
@@ -235,8 +235,50 @@ add_filter( 'c2c_obfuscate_email_filters', 'change_c2c_obfuscate_email_filters' 
 
 == Changelog ==
 
-= 3.7 (2020-06-30) =
+= 3.8 (2021-04-10) =
+Highlights:
 
+* This minor release updates updates the plugin framework, restructures the unit test file structure, and notes compatibility through WP 5.7+.
+
+Details:
+
+* Change: Update plugin framework to 060
+    * 060:
+    * Rename class from `c2c_{PluginName}_Plugin_051` to `c2c_Plugin_060`
+    * Move string translation handling into inheriting class making the plugin framework code plugin-agnostic
+        * Add abstract function `get_c2c_string()` as a getter for translated strings
+        * Replace all existing string usage with calls to `get_c2c_string()`
+    * Handle WordPress's deprecation of the use of the term "whitelist"
+        * Change: Rename `whitelist_options()` to `allowed_options()`
+        * Change: Use `add_allowed_options()` instead of deprecated `add_option_whitelist()` for WP 5.5+
+        * Change: Hook `allowed_options` filter instead of deprecated `whitelist_options` for WP 5.5+
+    * New: Add initial unit tests (currently just covering `is_wp_version_cmp()` and `get_c2c_string()`)
+    * Add `is_wp_version_cmp()` as a utility to compare current WP version against a given WP version
+    * Refactor `contextual_help()` to be easier to read, and correct function docblocks
+    * Don't translate urlencoded donation email body text
+    * Add inline comments for translators to clarify purpose of placeholders
+    * Change PHP package name (make it singular)
+    * Tweak inline function description
+    * Note compatibility through WP 5.7+
+    * Update copyright date (2021)
+    * 051:
+    * Allow setting integer input value to include commas
+    * Use `number_format_i18n()` to format integer value within input field
+    * Update link to coffee2code.com to be HTTPS
+    * Update `readme_url()` to refer to plugin's readme.txt on plugins.svn.wordpress.org
+    * Remove defunct line of code
+* Change: Move translation of all parent class strings into main plugin file
+* Change: Escape markup class attributes before output (for hardening)
+* Change: Restructure unit test file structure
+    * New: Create new subdirectory `phpunit/` to house all files related to unit testing
+    * Change: Move `bin/` to `phpunit/bin/`
+    * Change: Move `tests/bootstrap.php` to `phpunit/`
+    * Change: Move `tests/` to `phpunit/tests/`
+    * Change: Rename `phpunit.xml` to `phpunit.xml.dist` per best practices
+* Change: Note compatibility through WP 5.7+
+* Change: Update copyright date (2021)
+
+= 3.7 (2020-06-30) =
 Highlights:
 
 * This minor release updates its plugin framework, omits `type` attribute for `style` tag when theme supports 'html5', adds a TODO.md file, updates a few URLs to be HTTPS, expands unit testing, and updates compatibility to be WP 4.9 through 5.4+.
@@ -266,61 +308,13 @@ Details:
 * Change: Note compatibility through WP 5.3+
 * Change: Update copyright date (2020)
 
-= 3.6 (2019-04-22) =
-Highlights:
-
-* This release is a minor update that verifies compatibility through WordPress 5.1+, drops compatibility with versions of WordPress older than 4.7, and makes minor behind-the-scenes improvements.
-
-Details:
-
-* Change: Initialize plugin on `plugins_loaded` action instead of on load
-* Change: Update plugin framework to 049
-    * 049:
-    * Correct last arg in call to `add_settings_field()` to be an array
-    * Wrap help text for settings in `label` instead of `p`
-    * Only use `label` for help text for checkboxes, otherwise use `p`
-    * Ensure a `textarea` displays as a block to prevent orphaning of subsequent help text
-    * Note compatibility through WP 5.1+
-    * Update copyright date (2019)
-    * 048:
-    * When resetting options, delete the option rather than setting it with default values
-    * Prevent double "Settings reset" admin notice upon settings reset
-    * 047:
-    * Don't save default setting values to database on install
-    * Change "Cheatin', huh?" error messages to "Something went wrong.", consistent with WP core
-    * Note compatibility through WP 4.9+
-    * Drop compatibility with version of WP older than 4.7
-    * 046:
-    * Fix `reset_options()` to reference instance variable `$options`.
-    * Note compatibility through WP 4.7+.
-    * Update copyright date (2017)
-    * 045:
-    * Ensure `reset_options()` resets values saved in the database.
-* New: Add README.md file
-* New: Add CHANGELOG.md file and move all but most recent changelog entries into it
-* New: Add inline documentation for hook
-* New: Add GitHub link to readme
-* Unit tests:
-    * New: Add unit test for defaults for settings
-    * Change: Improve tests for settings handling
-    * Change: Default `WP_TESTS_DIR` to `/tmp/wordpress-tests-lib` rather than erroring out if not defined via environment variable
-    * Change: Enable more error output for unit tests
-* Change: Store setting name in constant
-* Change: Downplay modern-day effectiveness of the techniques and improve overall explanations
-* Change: Improve documentation for hook within readme.txt
-* Change: Note compatibility through WP 5.1+
-* Change: Drop compatibility with version of WP older than 4.7
-* Change: Convert last remaing instances of "e-mail" to "email"
-* Change: Rename readme.txt section from 'Filters' to 'Hooks' and provide a better section intro
-* Change: Modify formatting of hook name in readme to prevent being uppercased when shown in the Plugin Directory
-* Change: Update installation instruction to prefer built-in installer over .zip file
-* Change: Update copyright date (2019)
-* Change: Update License URI to be HTTPS
-
 _Full changelog is available in [CHANGELOG.md](https://github.com/coffee2code/obfuscate-email/blob/master/CHANGELOG.md)._
 
 
 == Upgrade Notice ==
+
+= 3.8 =
+Minor update: updated the plugin framework, restructured the unit test file structure, noted compatibility through WP 5.7+, and updated copyright date (2021).
 
 = 3.7 =
 Minor update: updated plugin framework, added a TODO.md file, updated a few URLs to be HTTPS, expanded unit testing, updated compatibility to be WP 4.9 through 5.4+, and minor behind-the-scenes tweaks.

@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Obfuscate Email
- * Version:     3.7
+ * Version:     3.8
  * Plugin URI:  https://coffee2code.com/wp-plugins/obfuscate-email/
  * Author:      Scott Reilly
  * Author URI:  https://coffee2code.com/
@@ -18,7 +18,7 @@
  *
  * @package Obfuscate_Email
  * @author  Scott Reilly
- * @version 3.7
+ * @version 3.8
  */
 
 /*
@@ -93,7 +93,7 @@ final class c2c_ObfuscateEmail extends c2c_Plugin_060 {
 	 * Constructor.
 	 */
 	protected function __construct() {
-		parent::__construct( '3.7', 'obfuscate-email', 'c2c', __FILE__, array() );
+		parent::__construct( '3.8', 'obfuscate-email', 'c2c', __FILE__, array() );
 		register_activation_hook( __FILE__, array( __CLASS__, 'activation' ) );
 
 		return self::$instance = $this;
