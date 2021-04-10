@@ -27,6 +27,7 @@
     * Update `readme_url()` to refer to plugin's readme.txt on plugins.svn.wordpress.org
     * Remove defunct line of code
 * Change: Move translation of all parent class strings into main plugin file
+* Change: Escape markup class attributes before output (for hardening)
 * Change: Restructure unit test file structure
     * New: Create new subdirectory `phpunit/` to house all files related to unit testing
     * Change: Move `bin/` to `phpunit/bin/`

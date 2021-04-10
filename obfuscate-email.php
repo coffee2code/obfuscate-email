@@ -377,7 +377,7 @@ HTML;
 		}
 
 		if ( $allow_markup && $options['use_display_none'] ) {
-			$none = '<span class="' . $this->css_display_none . '">null</span>';
+			$none = '<span class="' . esc_attr( $this->css_display_none ) . '">null</span>';
 			if ( $options['use_text_direction'] ) {
 				$at = $none . $at;
 			} else {
@@ -392,7 +392,7 @@ HTML;
 		}
 
 		if ( $allow_markup && $options['use_text_direction'] ) {
-			$email = '<span class="' . $this->css_text_direction . '">' . $email . '</span>';
+			$email = '<span class="' . esc_attr( $this->css_text_direction ) . '">' . $email . '</span>';
 		}
 
 		return $email;
