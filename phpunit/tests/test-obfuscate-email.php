@@ -95,7 +95,7 @@ class Obfuscate_Email_Test extends WP_UnitTestCase {
 	}
 
 	public function test_get_version() {
-		$this->assertEquals( '3.8', $this->obj->version() );
+		$this->assertEquals( '3.8.1', $this->obj->version() );
 	}
 
 	public function test_plugin_framework_class_name() {

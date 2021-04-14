@@ -6,7 +6,7 @@ License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Requires at least: 4.9
 Tested up to: 5.7
-Stable tag: 3.8
+Stable tag: 3.8.1
 
 Obfuscate email addresses to deter email-harvesting spammers.
 
@@ -235,6 +235,9 @@ add_filter( 'c2c_obfuscate_email_filters', 'change_c2c_obfuscate_email_filters' 
 
 == Changelog ==
 
+= 3.8.1 (2021-04-14) =
+* Fix: Update plugin framework to 061 to fix a bug preventing settings from getting saved
+
 = 3.8 (2021-04-10) =
 Highlights:
 
@@ -303,15 +306,13 @@ Details:
     * Change: Update test for default hooks
     * Change: Use HTTPS for link to WP SVN repository in bin script for configuring unit tests (and delete commented-out code)
 
-= 3.6.1 (2020-01-03) =
-* Change: Unit tests: Update unit test install script and bootstrap to use latest WP unit test repo
-* Change: Note compatibility through WP 5.3+
-* Change: Update copyright date (2020)
-
 _Full changelog is available in [CHANGELOG.md](https://github.com/coffee2code/obfuscate-email/blob/master/CHANGELOG.md)._
 
 
 == Upgrade Notice ==
+
+= 3.8.1 =
+Recommended bugfix release: fixed a bug preventing settings from getting saved; updated plugin framework to v061
 
 = 3.8 =
 Minor update: updated the plugin framework, restructured the unit test file structure, noted compatibility through WP 5.7+, and updated copyright date (2021).
